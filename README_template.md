@@ -7,9 +7,10 @@ TEAM: SOLO PROJECT
 MEMBER(s): SUZANNE WOLF 
 file name: README TEMPLATE
 ---
+README/images/screenShot-youtube.png
 
 
-https://github.com/GreenbergKU/slap-jack-2005m1/blob/documentation-sw-customize/README/images/
+https://github.com/GreenbergKU/slap-jack-2005m1/blob/documentation-sw-customize/README/images/screenShot-youtube.png
 <!--
 https://github.com/MarchCorbin/ideabox-boilerplate/blob/master/pull_request_template.md
 - this how to display pictures

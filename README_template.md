@@ -1,42 +1,49 @@
 ---
-PROJECT: 
+PROJECT: SLAP-JACK
 PROGRAM: TURING FE
-TERM: MOD 1b
-DATE: 00/00/2020
-TEAM: 
-MEMBER(s): 
-file name: greenbergKU's README template
+TERM: MOD 1b FINAL PROJECT
+DATE: 06/07/2020
+TEAM: SOLO PROJECT
+MEMBER(s): SUZANNE WOLF 
+file name: README TEMPLATE
+---
+
+
+# PROJECT SLAP-JACK: final project (solo)
 ---
 ---
-# PROJECT NAME: type project
+![Scott's slack profile picture(med)](https://ca.slack-edge.com/T029P2S9M-UJ910QEJF-7244f37f7e12-75)
+![Sue's slack profile picture (med)](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf8-75)
+
+---
+* project manager: __Scott__ [(github)](https://github.com/turingschool-examples)
+* contributer: __Sue__ [(GitHub profile)](https://github.com/GreenbergKU)
+---
+---
+
+
+
+
+
+<!--
 ![Leta's slack profile picture (small)](https://ca.slack-edge.com/T029P2S9M-U37MJAV0T-007ccf2f5eb2-85)
 ![Casey](https://ca.slack-edge.com/T029P2S9M-U6VMF6L85-fa69b231d590-85) 
-![Scott](https://ca.slack-edge.com/T029P2S9M-UJ910QEJF-7244f37f7e12-85)
-
-![Sue's slack profile picture (small)](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf8-85)
 ![name](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf0-85)
 ![name](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf0-85)
-
 * project manager: __Leta__ [(GitHub profile)](https://github.com/turingschool-examples)
 * project manager: __Casey__ [(github)](https://github.com/turingschool-examples)
-* project manager: __Scott__ [(github)](https://github.com/turingschool-examples)
-
-
 * contributer: __Sue__ [(GitHub profile)](https://github.com/GreenbergKU)
 * contributer: __`${username}`__ <[(github)](https://github.com/`${username}`)>
 * contributer: __`${username}`__ <[(github)](https://github.com/`${username}`)>
----
----
+-->
 
 <!--
 <slack thumbnail pics> 
 ![Casey](https://ca.slack-edge.com/T029P2S9M-U6VMF6L85-fa69b231d590-72) 
 ![Leta](https://ca.slack-edge.com/T029P2S9M-U37MJAV0T-007ccf2f5eb2-72)
-
 ![Sue](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf8-72) 
 ![name](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf0-72)
 ![name](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf0-72)
-<br> 
 
 -->
 ## Brief Synopsis
@@ -53,18 +60,15 @@ Every developer has more ideas than time...
 
 - this is how to link in markdown 
  - [Download this `svg` icons file](https://drive.google.com/drive/folders/18xpWplI0tpXIK1omBZeq04LEx2OMzzMK?usp=sharing)
- - ```[Download this `svg` icons file](https://drive.google.com/drive/folders/18xpWplI0tpXIK1omBZeq04LEx2OMzzMK?usp=sharing```
- 
- 
+ - ```[Download this `svg` icons file](https://drive.google.com/drive/folders/18xpWplI0tpXIK1omBZeq04LEx2OMzzMK?usp=sharing``` 
 - this how to display pictures
   - <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png">
   - ``` <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png"> ```
-  
-  - **or**
-  
+  - **or** 
   - ![alt text](https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png)
   - ``` ![alt text](https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png) ```
-  - can't control size of image with this style
+  #### can't control size of image with this style
+  
   
 <!--
 - Go checkout the [IDEABOX project website](https://marchcorbin.github.io/ideabox-boilerplate/) on Github Pages.

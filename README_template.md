@@ -9,11 +9,22 @@ file name: README TEMPLATE
 ---
 
 
+https://github.com/GreenbergKU/slap-jack-2005m1/blob/documentation-sw-customize/README/images/
+<!--
+https://github.com/MarchCorbin/ideabox-boilerplate/blob/master/pull_request_template.md
+- this how to display pictures
+  - <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png">
+  - ``` <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png"> ```
+  - **or** 
+  - ![alt text](https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png)
+  - ``` ![alt text](https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png) ```
+-->
+
 # PROJECT SLAP-JACK: final project (solo)
 ---
 ---
-![Scott's slack profile picture(med)](https://ca.slack-edge.com/T029P2S9M-UJ910QEJF-7244f37f7e12-75)
-![Sue's slack profile picture (med)](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf8-75)
+![Scott's slack profile picture(med)](https://ca.slack-edge.com/T029P2S9M-UJ910QEJF-7244f37f7e12-72)
+![Sue's slack profile picture (med)](https://ca.slack-edge.com/T029P2S9M-UTPTTDE84-13b671276cf8-72)
 
 ---
 * project manager: __Scott__ [(github)](https://github.com/turingschool-examples)

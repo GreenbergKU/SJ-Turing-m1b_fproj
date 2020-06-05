@@ -7,19 +7,22 @@ TEAM: SOLO PROJECT
 MEMBER(s): SUZANNE WOLF 
 file name: README TEMPLATE
 ---
-README/images/screenShot-youtube.png
 
+![Screen Shot 2020-06-04 at 9 08 09 PM](https://user-images.githubusercontent.com/10098034/83832727-8b988800-a6a7-11ea-93d9-7a92b6eecb53.png)
 
+(https://user-images.githubusercontent.com/10098034/83832727-8b988800-a6a7-11ea-93d9-7a92b6eecb53.png)
+
+<!--
 https://github.com/GreenbergKU/slap-jack-2005m1/blob/documentation-sw-customize/README/images/screenShot-youtube.png
 <!--
-https://github.com/MarchCorbin/ideabox-boilerplate/blob/master/pull_request_template.md
-- this how to display pictures
-  - <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png">
-  - ``` <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png"> ```
+      https://github.com/MarchCorbin/ideabox-boilerplate/blob/master/pull_request_template.md
+      - this how to display pictures
+        - <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user- images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png">
+        - ``` <img width="250" alt="Mobile_Layout_card_Example-20200411_333AM" src="https://user-     images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png"> ```
   - **or** 
   - ![alt text](https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png)
-  - ``` ![alt text](https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png) ```
--->
+  - ``` ![alt text](https://user-images.githubusercontent.com/10098034/79301108-e383f100-7ea5-11ea-849f-996531f06cd1.png) ```-->
+
 
 # PROJECT SLAP-JACK: final project (solo)
 ---

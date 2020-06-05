@@ -1,3 +1,13 @@
+---
+PROJECT: SLAP-JACK
+PROGRAM: TURING FE
+TERM: MOD 1b FINAL PROJECT
+DATE: 06/07/2020
+TEAM: SOLO PROJECT
+MEMBER(s): SUZANNE WOLF 
+file name: README TEMPLATE
+---
+
 # DTR: Define the Relationship
 
 Use this template when conducting DTR with your project partners. *It's recommended that you copy/paste this template into your own gist each time you conduct a DTR to take notes on the conversation.* 

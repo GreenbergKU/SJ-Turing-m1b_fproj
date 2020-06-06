@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    display: flexbox;
+    background-color: orange;
+    color: white;
+  /*   align-content: space-around; */
+  }
+  
+  h1 {
+    margin: 3%;
+    text-align: center;
+  }
+  
+  h3 {
+    display: flexbox;
+    width: 230px;
+    border: black 1px dashed;
+    text-align: center;
+    margin-top: 1%;
+  }
+  
+  section {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    border: black 1px dotted;
+  }
+  
+  
+  .deck-cards {
+    width: 230px;
+    height: 300px;
+    background-color: white;  
+    border: black 2px dashed;
+    
+    color: black;
+    text-align: center;
+  }
+  
+  /* *SPACING- deckCards(top)* */
+  #deck-cards {
+    margin-top: 15%;
+  }
+  
+  

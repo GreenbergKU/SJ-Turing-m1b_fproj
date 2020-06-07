@@ -1,11 +1,11 @@
 
 class Game {
-  constructor(playerA, playerB, centerPile, card) {
+  constructor(playerA, playerB, centerPile) {
     this.playerA = playerA;
     this.playerB = playerB;
     // this.cardDeck = Array.from(new Array(52), function(x,i) {x+=i; return i})
     this.centerPile = centerPile || [];
-    this.card = card;
+    this.card = {};
     this.deckCards = [];
     this.playersTurn = this.playerA;
     this.timeToSlap = false;
@@ -14,44 +14,42 @@ class Game {
 
   startGame() {  
     this.setDefaults();   
-    this.makeDeck();
+    this.createDeck();
     this.shuffle(this.deckCards);
     this.dealCards(this.deckCards);
   };
 
-  setDefaults() {
+  setGameDefaults() {
     this.playerB.playersTurn = false;
     this.playerA.playersTurn = true; 
   };
 
-  makeDeck() {
-    var card = {};
-     this.deckCards = cards;
+  createDeck() {
+    this.card = {};
+    this.deckCards;
       for (var number = 13; number > 0; number--) {
         for (var suit = 4; suit > 0; suit--) {
-        { card = {
-          id: `${number}-${suit}`,
-          number: number,
-          suit: suit,
-          img: "png",
-          filepath: `./assets/deckCard/${number}-${suit}`
-        }}; 
+          this.card = {
+            id: `${number}-${suit}`,
+            number: number,
+            suit: suit,
+            img: "png",
+            filepath: `./assets/deckCard/${number}-${suit}`
+          };
+        }; 
         this.deckCards.push(card);
       };
-    }; return this.deckCards
+      return this.deckCards
   }; 
+ 
 
-
-  shuffle(array) {    
-          //console.log("array before shuffle:", "'array' =", array)
-          //console.log("1:", this, "2:", )
+  shuffle(array) {           
     var randomIndex, randomCard;
     for (var i = array.length; i > 0; i--) {
       randomIndex = Math.floor(Math.random() * array.length);      
       randomCard = array.splice(randomIndex, 1);       
       array.push(randomCard[0]);
-    }; 
-        // console.log("array after shuffle:", "'array' =", array)
+    };  
     return array
   }; 
 
@@ -61,19 +59,15 @@ class Game {
     while((i = array.shift()) !== undefined) {
       array.length % 2 === 0 ? 
       this.playerA.hand.push(i) :
-      this.playerB.hand.push(i) 
-      console.log(i);
+      this.playerB.hand.push(i);     
     };  
-  };
+  }; 
 
+  // this.centerPile;
+  //console.log(i);
   calculateTurn() {
-        console.log(
-          "turnA ? = ", this.playerA.playersTurn, 
-          "turnB ? = ", this.playerB.playersTurn,
-        )
     this.playerA.playersTurn ? game.playerA.playCard() : game.playerB.playCard();
-    this.toggleTurn();
-    this.centerPile
+    this.toggleTurn();  
   };
 
   toggleTurn() {
@@ -82,49 +76,49 @@ class Game {
   };
 
   checkWinConditions() {
-    var timeToSlap;
-
-          console.log("before:","TIME to SLAP = ", timeToSlap)
-
-   timeToSlap === 
+    this.timeToSlap === 
       this.centerPile.length > 2 ? 
-      ((this.centerPile.slice(-3))[2].number === 11 ||
-      (this.centerPile.slice(-3))[1].number === (this.centerPile.slice(-3))[2].number ||  
-      (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[2].number) :
+        ((this.centerPile.slice(-3))[2].number === 11 ||
+        (this.centerPile.slice(-3))[1].number === (this.centerPile.slice(-3))[2].number ||  
+        (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[2].number) :    
     
-          this.centerPile.length > 1 ? 
-          ((this.centerPile.slice(-3))[1].number === 11 ||   
-          (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[1].number) :
+    this.centerPile.length > 1 ? 
+      ((this.centerPile.slice(-3))[1].number === 11 ||   
+      (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[1].number) :
+   
+    this.centerPile.length === 1 ? 
+      (this.centerPile.slice(-3))[0].number === 11 : null;
+          
+          console.log("before:","TIME to SLAP = ", this.timeToSlap)
+          console.log("after:","TIME to SLAP = ", this.timeToSlap)
+          console.log(
+              "0", (this.centerPile.slice(-3))[0].id,
+              "1", (this.centerPile.slice(-3))[1].id,
+              "2", (this.centerPile.slice(-3))[2].id,
+              "0", (this.centerPile.slice(-3))[0].number,
+              "1", (this.centerPile.slice(-3))[1].number,
+              "2", (this.centerPile.slice(-3))[2].number,   
+              "0", (this.centerPile.slice(-3))[0].suit,
+              "1", (this.centerPile.slice(-3))[1].suit,
+              "2", (this.centerPile.slice(-3))[2].suit,   
+              "0", (this.centerPile.slice(-3))[0],
+              "1", (this.centerPile.slice(-3))[1],
+              "2", (this.centerPile.slice(-3))[2],)
+  };       
 
-               this.centerPile.length === 1 ? 
-               (this.centerPile.slice(-3))[0].number === 11 : null;
-
-
-      console.log("after:","TIME to SLAP = ", timeToSlap)    
-
-      console.log(
-        "0", (this.centerPile.slice(-3))[0].id,
-        "1", (this.centerPile.slice(-3))[1].id,
-        "2", (this.centerPile.slice(-3))[2].id,
-        "0", (this.centerPile.slice(-3))[0].number,
-        "1", (this.centerPile.slice(-3))[1].number,
-        "2", (this.centerPile.slice(-3))[2].number,   
-        "0", (this.centerPile.slice(-3))[0].suit,
-        "1", (this.centerPile.slice(-3))[1].suit,
-        "2", (this.centerPile.slice(-3))[2].suit,   
-        "0", (this.centerPile.slice(-3))[0],
-        "1", (this.centerPile.slice(-3))[1],
-        "2", (this.centerPile.slice(-3))[2],
-        )
-
-      }       
-
-slapDelegation() {
-
-}
+  slapDelegation() { 
+    this.timeToSlap ? this.getGoodSlapRewards() : 
+    !this.player.push(this.player.hand.shift());
+      //WORD THIS BETTER!!!!!!!!!
+  };
   
 
 };
+
+       //console.log("array before shuffle:", "'array' =", array)
+         //console.log("1:", this, "2:", )
+        // console.log("array after shuffle:", "'array' =", array)
+
       // "conditionSlice = ", conditionSlice,
       //  "0", conditionSlice[0].id,
       //   "1", conditionSlice[1].number,

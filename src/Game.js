@@ -8,6 +8,7 @@ class Game {
     this.card = card;
     this.deckCards = [];
     this.playersTurn = this.playerA;
+    this.timeToSlap = false;
     // playerA goes 1st by default
   };
 
@@ -25,22 +26,22 @@ class Game {
 
   makeDeck() {
     var card = {};
-    this.deckCards.id
-    this.deckCards.card = {};
-    for (var number = 13; number > 0; number--) {
-      for (var suit = 4; suit > 0; suit--) {
-        card = {
-          id: `${number}:${suit}`,
+     this.deckCards = cards;
+      for (var number = 13; number > 0; number--) {
+        for (var suit = 4; suit > 0; suit--) {
+        { card = {
+          id: `${number}-${suit}`,
           number: number,
           suit: suit,
           img: "png",
-          filepath: "./assets/deckCard/RGBg-00"
-        }; 
+          filepath: `./assets/deckCard/${number}-${suit}`
+        }}; 
         this.deckCards.push(card);
       };
     }; return this.deckCards
   }; 
-  
+
+
   shuffle(array) {    
           //console.log("array before shuffle:", "'array' =", array)
           //console.log("1:", this, "2:", )
@@ -82,20 +83,9 @@ class Game {
 
   checkWinConditions() {
     var timeToSlap;
-    console.log(
-   "0", (this.centerPile.slice(-3))[0].id,
-   "1", (this.centerPile.slice(-3))[1].id,
-   "2", (this.centerPile.slice(-3))[2].id,
-   "0", (this.centerPile.slice(-3))[0].number,
-   "1", (this.centerPile.slice(-3))[1].number,
-   "2", (this.centerPile.slice(-3))[2].number,   
-   "0", (this.centerPile.slice(-3))[0].suit,
-   "1", (this.centerPile.slice(-3))[1].suit,
-   "2", (this.centerPile.slice(-3))[2].suit,   
-   "0", (this.centerPile.slice(-3))[0],
-   "1", (this.centerPile.slice(-3))[1],
-   "2", (this.centerPile.slice(-3))[2],
-   )
+
+          console.log("before:","TIME to SLAP = ", timeToSlap)
+
    timeToSlap === 
       this.centerPile.length > 2 ? 
       ((this.centerPile.slice(-3))[2].number === 11 ||
@@ -110,9 +100,29 @@ class Game {
                (this.centerPile.slice(-3))[0].number === 11 : null;
 
 
-  console.log("TIME to SLAP = ", timeToSlap)    
-            
-  }       
+      console.log("after:","TIME to SLAP = ", timeToSlap)    
+
+      console.log(
+        "0", (this.centerPile.slice(-3))[0].id,
+        "1", (this.centerPile.slice(-3))[1].id,
+        "2", (this.centerPile.slice(-3))[2].id,
+        "0", (this.centerPile.slice(-3))[0].number,
+        "1", (this.centerPile.slice(-3))[1].number,
+        "2", (this.centerPile.slice(-3))[2].number,   
+        "0", (this.centerPile.slice(-3))[0].suit,
+        "1", (this.centerPile.slice(-3))[1].suit,
+        "2", (this.centerPile.slice(-3))[2].suit,   
+        "0", (this.centerPile.slice(-3))[0],
+        "1", (this.centerPile.slice(-3))[1],
+        "2", (this.centerPile.slice(-3))[2],
+        )
+
+      }       
+
+slapDelegation() {
+
+}
+  
 
 };
       // "conditionSlice = ", conditionSlice,

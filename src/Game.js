@@ -1,10 +1,11 @@
 
 class Game {
-  constructor(playerA, playerB, centerPile) {
+  constructor(playerA, playerB, centerPile, card) {
     this.playerA = playerA;
     this.playerB = playerB;
     // this.cardDeck = Array.from(new Array(52), function(x,i) {x+=i; return i})
     this.centerPile = centerPile || [];
+    this.card = card;
     this.deckCards = [];
     this.playersTurn = this.playerA;
     // playerA goes 1st by default
@@ -24,13 +25,18 @@ class Game {
 
   makeDeck() {
     var card = {};
+    this.deckCards.id
+    this.deckCards.card = {};
     for (var number = 13; number > 0; number--) {
       for (var suit = 4; suit > 0; suit--) {
         card = {
           id: `${number}:${suit}`,
           number: number,
-          suit: suit
-        }; this.deckCards.push(card);
+          suit: suit,
+          img: "png",
+          filepath: "./assets/deckCard/RGBg-00"
+        }; 
+        this.deckCards.push(card);
       };
     }; return this.deckCards
   }; 
@@ -74,8 +80,49 @@ class Game {
     this.playerB.playersTurn = !this.playerB.playersTurn;
   };
 
-};
+  checkWinConditions() {
+    var timeToSlap;
+    console.log(
+   "0", (this.centerPile.slice(-3))[0].id,
+   "1", (this.centerPile.slice(-3))[1].id,
+   "2", (this.centerPile.slice(-3))[2].id,
+   "0", (this.centerPile.slice(-3))[0].number,
+   "1", (this.centerPile.slice(-3))[1].number,
+   "2", (this.centerPile.slice(-3))[2].number,   
+   "0", (this.centerPile.slice(-3))[0].suit,
+   "1", (this.centerPile.slice(-3))[1].suit,
+   "2", (this.centerPile.slice(-3))[2].suit,   
+   "0", (this.centerPile.slice(-3))[0],
+   "1", (this.centerPile.slice(-3))[1],
+   "2", (this.centerPile.slice(-3))[2],
+   )
+   timeToSlap === 
+      this.centerPile.length > 2 ? 
+      ((this.centerPile.slice(-3))[2].number === 11 ||
+      (this.centerPile.slice(-3))[1].number === (this.centerPile.slice(-3))[2].number ||  
+      (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[2].number) :
+    
+          this.centerPile.length > 1 ? 
+          ((this.centerPile.slice(-3))[1].number === 11 ||   
+          (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[1].number) :
 
+               this.centerPile.length === 1 ? 
+               (this.centerPile.slice(-3))[0].number === 11 : null;
+
+
+  console.log("TIME to SLAP = ", timeToSlap)    
+            
+  }       
+
+};
+      // "conditionSlice = ", conditionSlice,
+      //  "0", conditionSlice[0].id,
+      //   "1", conditionSlice[1].number,
+      //    "2", conditionSlice[2].length,
+         
+      //    "A centerPile.length", game.centerPile.length,  
+         
+    //    "B centerPile.length", game.centerPile.length, 
 
 // this.playerA.hand.push(array.shift())
 // var playerA = game.playerA;

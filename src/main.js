@@ -1,9 +1,9 @@
 window.onload = setUpGame();
-
 var game;
 
 function setUpGame() {
-    game = new Game((new Player("playerA")), (new Player("playerB")));
-    //game.shuffle(game.cardDeck); 
+    var playerA = new Player("playerA");
+    var playerB = new Player("playerB");
+    game = new Game(playerA, playerB); 
     game.startGame();
 }

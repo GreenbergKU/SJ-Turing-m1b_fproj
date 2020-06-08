@@ -64,14 +64,14 @@ class Game {
   takeTurn() {              console.log('taketurn')
    
     //this.checkGameStatus();  Added to eventHandlers
-    this.card = this.playersTurn.hand.slice(0,1);
-    displayCard(this.card)
+   
+    displayCard()
     this.playersTurn.playCard();
     this.toggleTurn(); 
     this.checkWinConditions();
     //INFINATE LOOP WARNING - if no bugs...
     this.checkGameStatus() ? 
-    alert("roundComplete- endGame=False") : alert("endGame=true") 
+    alert("endGame=true") : alert("roundComplete- endGame=False");
   };
 
   toggleTurn() {         console.log('function toggleTurn')
@@ -115,19 +115,20 @@ class Game {
   };
 
   checkGameStatus() {      console.log('checkGameStatus')
-    this.endGameCondition = this.playerA.hand === 0 || 
-    this.playerB.hand === 0 ? true : false;
+    this.endGameCondition = this.playerA.hand.length === 0 || 
+    this.playerB.hand.length === 0 ? true : false;
         // check players hands for cards (could be done in playCard)
         // boolean for endGameCondition()
     //     console.log("player", player.length) //= `this.${player[0]}`)
     // return this.endGameCondition = player.hand === 0 || 
     // player.hand === 0 ? true : false;
-  
+    return this.endGameCondition
   }
-//   checkForSlap() {        
-//     console.log("checkForSlap")
-//     this.slapOccured ? this.slapDelegation() 
-// } 
+  
+  checkForSlap() {        
+    console.log("checkForSlap")
+    this.slapOccured ? this.slapDelegation() : null;
+  } 
   
       // ...!   if (slap occurs) {updateSlap()}
       // slapped must be updated by this time
@@ -135,12 +136,13 @@ class Game {
     this.player = this.playerA.slapped ? this.playerA : this.playerB;
     this.otherPlayer = this.playerA.slapped ? this.playerB : this.playerA
     // should be taken care of by event listener
+    console.log("@delegation: this.player= ", this.player)
     this.timeToSlap ? this.goodSlapAction(this.player) : 
     this.player.push(this.otherPlayer.hand.shift());
-  updateSlap();
+    this.updateSlap();
         //WORD THIS BETTER!!!!!!!!!
         /// currently on both main.js and game.js
-    };
+  };
    
   goodSlapAction(player) {                  console.log('goodSlapAction')
     player.push(this.shuffle(this.centerPile));

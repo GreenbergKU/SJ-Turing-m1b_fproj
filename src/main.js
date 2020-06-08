@@ -90,7 +90,14 @@ updateSlap();
   //WORD THIS BETTER!!!!!!!!!
 };
 
-displayCard()
+function displayCard() {
+
+    
+    var card = game.playersTurn.hand.slice(0,1);
+    var filepath = card[0].filepath
+    console.log(card, card[0].filepath);
+}
+
 
 //*************** HELPER FUNCTIONS ****************** */
   //// NEED TO DO THIS!!!

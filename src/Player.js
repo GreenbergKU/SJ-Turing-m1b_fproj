@@ -3,9 +3,10 @@ class Player {
     this.id = id;
     this.wins = wins || 0;
     this.hand = hand || [];
+    this.slapped = false;
   };
 
-  playCard() {
+  playCard() {                              console.log("playCard")
     console.log( 
       "B centerPile.length", game.centerPile.length, 
       "B this.hand", this.hand.length, 
@@ -21,10 +22,13 @@ class Player {
     )  //after the function fires
   };
   
-  saveToStorage() {
+  saveToStorage() {                              console.log("saveToStorage")
     this.wins
   };
 
-
+  toggleSlap() {                                    console.log("toggleSlap")
+    return this.slapped = !this.slapped; 
+  }
+  
 };
    // if (this.hand.length > 0) { 

@@ -1,119 +1,171 @@
 
 class Game {
-  constructor(playerA, playerB, centerPile) {
-    this.playerA = playerA;
-    this.playerB = playerB;
-    // this.cardDeck = Array.from(new Array(52), function(x,i) {x+=i; return i})
-    this.centerPile = centerPile || [];
+  constructor(player1, player2) {
+    this.playerA = player1;
+    this.playerB = player2;
+    this.centerPile = [];
     this.card = {};
     this.deckCards = [];
-    this.playersTurn = this.playerA;
+    this.playersTurn = this.playerA
+      // playerA goes 1st by default
     this.timeToSlap = false;
-    // playerA goes 1st by default
+    // this.player = this.playerA || this.playerB
+      // might be unneccessary
+    this.slapOccured = false;
+    this.endGameCondition = false;
   };
 
-  startGame() {  
-    this.setDefaults();   
+  //should happen on main js
+  startGame() {         console.log('startGame');  
     this.createDeck();
-    this.shuffle(this.deckCards);
-    this.dealCards(this.deckCards);
+    this.dealCards(this.deckCards.card);   
   };
 
-  setGameDefaults() {
-    this.playerB.playersTurn = false;
-    this.playerA.playersTurn = true; 
-  };
-
-  createDeck() {
-    this.card = {};
-    this.deckCards;
+  createDeck() {          console.log('createDeck');
+    var card = {};
+     this.deckCards.card = []
       for (var number = 13; number > 0; number--) {
         for (var suit = 4; suit > 0; suit--) {
-          this.card = {
+          card = {
             id: `${number}-${suit}`,
             number: number,
             suit: suit,
-            img: "png",
             filepath: `./assets/deckCard/${number}-${suit}`
           };
+          this.deckCards.card.push(card);
         }; 
-        this.deckCards.push(card);
-      };
-      return this.deckCards
+      };  
+      console.log("createDeck()=this.deckCards:", this.deckCards.card,
+      "this.deckCards.card[0]:", this.deckCards.card[0])
   }; 
- 
 
-  shuffle(array) {           
+  shuffle(deck) {                              console.log('shuffleDeck');
+    console.log("shuffle():", this.deckCards.card)          
     var randomIndex, randomCard;
-    for (var i = array.length; i > 0; i--) {
-      randomIndex = Math.floor(Math.random() * array.length);      
-      randomCard = array.splice(randomIndex, 1);       
-      array.push(randomCard[0]);
-    };  
-    return array
+    for (var i = deck.length; i > 0; i--) {
+      randomIndex = Math.floor(Math.random() * deck.length);      
+      randomCard = deck.splice(randomIndex, 1);       
+      deck.push(randomCard[0]);
+    };     
+    return deck
   }; 
 
-  dealCards(array) {
-    this.shuffle(array);
+  dealCards(deck) {                           console.log('dealCards');  
+    this.shuffle(deck);
     var i;
-    while((i = array.shift()) !== undefined) {
-      array.length % 2 === 0 ? 
+    while((i = deck.shift()) !== undefined) {
+      deck.length % 2 === 0 ? 
       this.playerA.hand.push(i) :
-      this.playerB.hand.push(i);     
+      this.playerB.hand.push(i);           
     };  
   }; 
 
-  // this.centerPile;
-  //console.log(i);
-  calculateTurn() {
-    this.playerA.playersTurn ? game.playerA.playCard() : game.playerB.playCard();
-    this.toggleTurn();  
+  takeTurn() {                          console.log('taketurn')
+    // this.playerA.playersTurn ? game.playerA.playCard() : game.playerB.playCard();
+    this.checkGameStatus();
+    this.playersTurn.playCard();
+    this.toggleTurn(); 
+    this.checkWinConditions();
+    //alert("roundComplete")  
   };
 
-  toggleTurn() {
-    this.playerA.playersTurn = !this.playerA.playersTurn;
-    this.playerB.playersTurn = !this.playerB.playersTurn;
+  toggleTurn() {              console.log('function toggleTurn')
+     this.playerA.playersTurn = !this.playerA.playersTurn;
+     this.playerB.playersTurn = !this.playerB.playersTurn;                           
+    return this.playersTurn = this.playerA.playersTurn ? this.playerA : this.playerB;
   };
 
-  checkWinConditions() {
-    this.timeToSlap === 
-      this.centerPile.length > 2 ? 
+  eventHandler() {            console.log('eventHandler')
+    if (event)  {
+      if (simultaniousSlaps) {
+        this.twoSlapDecider();
+      };
+      this.updateSlap(player);
+    };
+  };
+
+  //// NEED TO DO THIS!!!
+  twoSlapDecider() {             console.log('twoSlapDecider')
+  };
+
+  updateSlap(player) {                   console.log("updateSlap")
+    this.slapOccured = !this.slapOccured;
+    player.toggleSlap()
+  };
+
+  checkWinConditions() {          console.log("checkWinConditions")                     
+    console.log("before:","TIME to SLAP = ", this.timeToSlap) ;
+    console.log("this.playersTurn:", this.playersTurn);
+    console.log("0", (this.centerPile.slice(-3))[0].id)
+    
+    this.timeToSlap =
+      (
+        this.centerPile.length > 2 ? 
         ((this.centerPile.slice(-3))[2].number === 11 ||
         (this.centerPile.slice(-3))[1].number === (this.centerPile.slice(-3))[2].number ||  
         (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[2].number) :    
     
-    this.centerPile.length > 1 ? 
-      ((this.centerPile.slice(-3))[1].number === 11 ||   
-      (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[1].number) :
+        this.centerPile.length > 1 ? 
+        ((this.centerPile.slice(-3))[1].number === 11 ||   
+        (this.centerPile.slice(-3))[0].number === (this.centerPile.slice(-3))[1].number) :
    
-    this.centerPile.length === 1 ? 
-      (this.centerPile.slice(-3))[0].number === 11 : null;
-          
-          console.log("before:","TIME to SLAP = ", this.timeToSlap)
-          console.log("after:","TIME to SLAP = ", this.timeToSlap)
-          console.log(
-              "0", (this.centerPile.slice(-3))[0].id,
-              "1", (this.centerPile.slice(-3))[1].id,
-              "2", (this.centerPile.slice(-3))[2].id,
-              "0", (this.centerPile.slice(-3))[0].number,
-              "1", (this.centerPile.slice(-3))[1].number,
-              "2", (this.centerPile.slice(-3))[2].number,   
-              "0", (this.centerPile.slice(-3))[0].suit,
-              "1", (this.centerPile.slice(-3))[1].suit,
-              "2", (this.centerPile.slice(-3))[2].suit,   
-              "0", (this.centerPile.slice(-3))[0],
-              "1", (this.centerPile.slice(-3))[1],
-              "2", (this.centerPile.slice(-3))[2],)
-  };       
+        this.centerPile.length === 1 ? 
+        (this.centerPile.slice(-3))[0].number === 11 : false
+      ) ? true : false
+      
+      this.timeToSlap ? this.checkForSlap() : this.takeTurn;
+  
+        console.log("after:","TIME to SLAP = ", this.timeToSlap)         
+  };
 
-  slapDelegation() { 
-    this.timeToSlap ? this.getGoodSlapRewards() : 
-    !this.player.push(this.player.hand.shift());
+  checkGameStatus() {                       console.log('checkGameStatus')
+    this.endGameCondition = this.playerA.hand === 0 || 
+    this.playerB.hand === 0 ? true : false;
+        // check players hands for cards (could be done in playCard)
+        // boolean for endGameCondition()
+  }
+
+  checkForSlap() {                              console.log("checkForSlap")
+    this.slapOccured ? this.slapDelegation() : this.takeTurn;
+  }       
+      // ...!   if (slap occurs) {updateSlap()}
+      // slapped must be updated by this time
+  slapDelegation() {                          console.log('slapDelegation')
+    this.player = this.playerA.slapped ? this.playerA : this.playerB;
+    this.otherPlayer = this.playerA.slapped ? this.playerB : this.playerA
+    
+    this.timeToSlap ? this.goodSlapAction(this.player) : 
+    this.player.push(this.otherPlayer.hand.shift());
+    updateSlap();
       //WORD THIS BETTER!!!!!!!!!
   };
   
-
+  goodSlapAction(player) {                  console.log('goodSlapAction')
+    player.push(this.shuffle(this.centerPile));
+  };
+    
 };
+//  createDeck() {
+//     var card = {};
+//     for (var number = 13; number > 0; number--) {
+//       for (var suit = 4; suit > 0; suit--) {
+//         card = {
+//           id: `${number}:${suit}`,
+//           number: number,
+//           suit: suit
+//         }; this.deckCards.push(card);
+//       };
+//     };  
+    
+//     return this.deckCards
+//   }; 
+
+  //should be happening within constructor
+  // setGameDefaults() {
+  //   this.playerB.playersTurn = false;
+  //   this.playerA.playersTurn = true; 
+  // };
+
 
        //console.log("array before shuffle:", "'array' =", array)
          //console.log("1:", this, "2:", )

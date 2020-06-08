@@ -6,6 +6,7 @@ class Game {
     this.centerPile = [];
     this.card = {};
     this.deckCards = [];
+    this.slap = [];
     this.playersTurn = this.playerA
       // playerA goes 1st by default
     this.timeToSlap = false;
@@ -16,10 +17,10 @@ class Game {
   };
 
   //should happen on main js
-  startGame() {         console.log('startGame');  
-    this.createDeck();
-    this.dealCards(this.deckCards.card);   
-  };
+  // startGame() {          
+  //   this.createDeck();
+  //   this.dealCards(this.deckCards.card);   
+  // };
 
   createDeck() {          console.log('createDeck');
     var card = {};
@@ -40,7 +41,7 @@ class Game {
   }; 
 
   shuffle(deck) {                              console.log('shuffleDeck');
-    console.log("shuffle():", this.deckCards.card)          
+    console.log("shuffle():", this.deckCards.card[0], )          
     var randomIndex, randomCard;
     for (var i = deck.length; i > 0; i--) {
       randomIndex = Math.floor(Math.random() * deck.length);      
@@ -50,54 +51,48 @@ class Game {
     return deck
   }; 
 
-  dealCards(deck) {                           console.log('dealCards');  
+  dealCards(deck) {              console.log('dealCards');  
     this.shuffle(deck);
     var i;
     while((i = deck.shift()) !== undefined) {
       deck.length % 2 === 0 ? 
       this.playerA.hand.push(i) :
       this.playerB.hand.push(i);           
-    };  
+    };  console.log(this.playerA.hand)
   }; 
 
-  takeTurn() {                          console.log('taketurn')
-    // this.playerA.playersTurn ? game.playerA.playCard() : game.playerB.playCard();
-    this.checkGameStatus();
+  takeTurn() {              console.log('taketurn')
+   
+    //this.checkGameStatus();  Added to eventHandlers
+    this.card = this.playersTurn.hand.slice(0,1);
+    displayCard(this.card)
     this.playersTurn.playCard();
     this.toggleTurn(); 
     this.checkWinConditions();
-    //alert("roundComplete")  
+    //INFINATE LOOP WARNING - if no bugs...
+    this.checkGameStatus() ? 
+    alert("roundComplete- endGame=False") : alert("endGame=true") 
   };
 
-  toggleTurn() {              console.log('function toggleTurn')
+  toggleTurn() {         console.log('function toggleTurn')
      this.playerA.playersTurn = !this.playerA.playersTurn;
      this.playerB.playersTurn = !this.playerB.playersTurn;                           
     return this.playersTurn = this.playerA.playersTurn ? this.playerA : this.playerB;
   };
 
-  eventHandler() {            console.log('eventHandler')
-    if (event)  {
-      if (simultaniousSlaps) {
-        this.twoSlapDecider();
-      };
-      this.updateSlap(player);
-    };
-  };
-
-  //// NEED TO DO THIS!!!
-  twoSlapDecider() {             console.log('twoSlapDecider')
-  };
-
-  updateSlap(player) {                   console.log("updateSlap")
+  updateSlap(player) {           console.log("updateSlap")
     this.slapOccured = !this.slapOccured;
+    //this.slap.push(player)
+    console.log("updSlap: player= ", player);
     player.toggleSlap()
   };
 
-  checkWinConditions() {          console.log("checkWinConditions")                     
+  checkWinConditions() {          console.log("chWinConditions")                     
     console.log("before:","TIME to SLAP = ", this.timeToSlap) ;
     console.log("this.playersTurn:", this.playersTurn);
-    console.log("0", (this.centerPile.slice(-3))[0].id)
-    
+    //console.log("0", (this.centerPile.slice(-3))[0])
+    // var i;
+    // while((i = this.centerPile.slice(-3)) !== undefined) {
     this.timeToSlap =
       (
         this.centerPile.length > 2 ? 
@@ -112,39 +107,49 @@ class Game {
         this.centerPile.length === 1 ? 
         (this.centerPile.slice(-3))[0].number === 11 : false
       ) ? true : false
+    
       
-      this.timeToSlap ? this.checkForSlap() : this.takeTurn;
+      this.timeToSlap ? this.checkForSlap() : null;
   
         console.log("after:","TIME to SLAP = ", this.timeToSlap)         
   };
 
-  checkGameStatus() {                       console.log('checkGameStatus')
+  checkGameStatus() {      console.log('checkGameStatus')
     this.endGameCondition = this.playerA.hand === 0 || 
     this.playerB.hand === 0 ? true : false;
         // check players hands for cards (could be done in playCard)
         // boolean for endGameCondition()
+    //     console.log("player", player.length) //= `this.${player[0]}`)
+    // return this.endGameCondition = player.hand === 0 || 
+    // player.hand === 0 ? true : false;
+  
   }
-
-  checkForSlap() {                              console.log("checkForSlap")
-    this.slapOccured ? this.slapDelegation() : this.takeTurn;
-  }       
+//   checkForSlap() {        
+//     console.log("checkForSlap")
+//     this.slapOccured ? this.slapDelegation() 
+// } 
+  
       // ...!   if (slap occurs) {updateSlap()}
       // slapped must be updated by this time
   slapDelegation() {                          console.log('slapDelegation')
     this.player = this.playerA.slapped ? this.playerA : this.playerB;
     this.otherPlayer = this.playerA.slapped ? this.playerB : this.playerA
-    
+    // should be taken care of by event listener
     this.timeToSlap ? this.goodSlapAction(this.player) : 
     this.player.push(this.otherPlayer.hand.shift());
-    updateSlap();
-      //WORD THIS BETTER!!!!!!!!!
-  };
-  
+  updateSlap();
+        //WORD THIS BETTER!!!!!!!!!
+        /// currently on both main.js and game.js
+    };
+   
   goodSlapAction(player) {                  console.log('goodSlapAction')
     player.push(this.shuffle(this.centerPile));
   };
     
 };
+
+ // this.playerA.playersTurn ? game.playerA.playCard() : game.playerB.playCard();
+
 //  createDeck() {
 //     var card = {};
 //     for (var number = 13; number > 0; number--) {

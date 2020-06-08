@@ -3,27 +3,32 @@ class Player {
     this.id = id;
     this.wins = wins || 0;
     this.hand = hand || [];
+    this.slapped = false;
   };
 
-  playCard() {
-    console.log(  //before the function
+  playCard() {                              console.log("playCard")
+    console.log( 
       "B centerPile.length", game.centerPile.length, 
       "B this.hand", this.hand.length, 
       "B game.playerA.hand", game.playerA.hand.length,
-    )
+    ) //before the function
+
     game.centerPile.push(this.hand.shift());
-    console.log(    //after the function fires
+
+    console.log(    
       "A centerPile.length", game.centerPile.length, 
       "A this.hand", this.hand.length, 
       "A game.playerA.hand", game.playerA.hand.length,
-    )
+    )  //after the function fires
   };
   
-
-  saveToStorage() {
+  saveToStorage() {                              console.log("saveToStorage")
     this.wins
+  };
+
+  toggleSlap() {                                    console.log("toggleSlap")
+    return this.slapped = !this.slapped; 
   }
-
-
+  
 };
    // if (this.hand.length > 0) { 

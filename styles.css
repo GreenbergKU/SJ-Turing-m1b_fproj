@@ -1,43 +1,73 @@
 * {
     box-sizing: border-box;
+    border-radius: 4%;
+    text-align: center;
   }
   
-  body {
-    display: flexbox;
-    background-color: orange;
+body {
     color: white;
-    align-content: space-around;
-  }
-  
-  h1 {
+}
+
+.background-img {
+   opacity: .9;
+}
+
+h1.ontop {
+    position: relative;
+    margin: 10px;
+    top: 2.4em;
+}
+
+h1 {
     margin: 3%;
-    text-align: center;
-  }
+    font-size: 30px;
+    border: rgb(42, 55, 155, 0.729) 4px solid;
+    padding: 2%;
+    width: auto;
+    background-color: rgba(42, 55, 155, 0.508);
+}
+
+h3 {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    width: 88px;
+    margin: 4%;
+    padding: 1%;
+    background-color: rgba(212, 0, 67, 0.3);
+    border: rgba(212, 0, 67, 0.69) 3px solid;
+
+}
+
+.h3-A { 
+    justify-content: center;
+    margin-right: 21%;
+    /* justify-self: flex-start; */
+}
+
+.h3-B {
+    justify-content: center;
+    margin-left: 21%;
+    /* justify-self: flex-end; */
+}
   
-  h3 {
-    display: flexbox;
-    width: 220px;
-    border: black 1px dashed;
-    text-align: center;
-    margin-top: 4%;
-  }
-  
-  section {
+section {
+    position: relative;
     display: flex;
     width: 100%;
     justify-content: space-around;
     border: black 1px dotted;
-  }
+    padding: 5px;
+    top: 6em;
+}
 
-  .deck-cards {
-    display: block;
+.deck-cards {
+    display: flex;
     width: 220px;
     height: 290px;
-    justify-self: center;
+    justify-content: center;
     color: black;
-    text-align: center;
- 
-  }
+}
   
 img {
     display: flex;
@@ -46,35 +76,47 @@ img {
     width: 210px;
     height: 280px;
     margin: 0;
-    box-shadow: 0px 0px 20px 20px purple;
-    border-radius: 4%;  
+    padding: 11px;
 }
 
 .playerA {
-    border: #00BCD4 10px solid;
+    border: rgba(212, 0, 67, 0.729) 20px solid;
+}
+
+.middle-pile {
+    border: rgba(42, 55, 155, .95) 20px solid;
+
 }
 
 .playerB {
-    border: #13ac31 10px solid;
-    border-radius: 4%;
+    border: rgba(212, 0, 67, 0.729) 20px solid;
 }
+border: rgba(212, 0, 67, 0.69) 3px solid;
 
+/* 
 .card-back {
-    overflow-x: scroll;
-    overflow: scroll;
-    width: 210px;
- 
-}
-
-.card-front {
-    height: 278px;
+    /* overflow-x: scroll; */
+    /* overflow: scroll; */
+    /* width: 210px;
+    height: 280px;
     padding: 15px;
+} */ */
+
+/* .card-front { */
+    /* height: 280px;
+
+    width: 210px;
+} */
+
+.win-section {
+    display: flex;
+    justify-items: self-end;
+    position: relative;
 }
+/* *SPACING- deckCards(top)* */
 
 
-
-  /* *SPACING- deckCards(top)* */
-  #deck-cards {
+#deck-cards {
     margin-top: 15%;
-  }
+}
   

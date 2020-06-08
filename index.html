@@ -6,23 +6,25 @@
         <link rel="stylesheet" type="text/css" href="./styles.css">
         <title>SLAP-JACK: FINAL PROJECT mod1#2005</title>
     </head>
-    <body>
-        <h1>CURRENT PLAY! Player # takes the pile!</h1>
+     <h1 class="ontop">CURRENT PLAY! Player # takes the pile!</h1>
+        
+     <body class="background-img" background="./assets/watercolor-background.png"></body>
+        
         <section id="deck-cards"> 
-          <div id="deck-card-pA" class="deck-cards player-hand" name="playerA" background="image">              
-          <img class="card-back playerA" src="assets/card-deck-png/back.png" alt="backside image of playing card">
+          <div id="deck-card-pA" class="deck-cards player-hand" name="playerA" background-img="">              
+          <img class="card-back playerA" src="assets/deckCards/back.png" alt="backside image of playing card">
         </div>
           <div id="deck-card-C" class="deck-cards center-pile" name="middle" background-img="">
-            <img class="card-front middle-pile" src="assets/card-deck-png/blue-jack.png" alt="backside image of playing card">
+            <img class="card-front middle-pile" src="assets/deckCards/11-4blue-jack.png" alt="backside image of playing card">
           </div>
           <div id="deck-card-pB" class="deck-cards player-hand" name="playerB" background-img="">
-            <img class="card-back playerB" src="assets/card-deck-png/back.png" alt="backside image of playing card">
+            <img class="card-back playerB" src="assets/deckCards/back.png" alt="backside image of playing card">
           </div>  
         </section>
         <section id="win-section">
-          <h3># Wins</h3>
-          <h3></h3>
-          <h3># Wins</h3>
+          <h3 class="h3-ontop h3-A"># Wins</h3>
+          <!-- <h3></h3> -->
+          <h3 class="h3-ontop h3-B"># Wins</h3>
         </secton>       
         <script src="./src/Player.js"></script>
         <script src="./src/Game.js"></script> 

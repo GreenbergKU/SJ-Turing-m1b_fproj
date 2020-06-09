@@ -81,6 +81,15 @@ img {
     padding: 11px;
 }
 
+img.playerTurnA {
+    background-color: gold;
+}
+
+img.playerTurnB {
+    background-color: gold;
+}
+
+
 .playerA {
     border: rgba(212, 0, 67, 0.729) 20px solid;
 }
@@ -93,7 +102,6 @@ img {
 .playerB {
     border: rgba(212, 0, 67, 0.729) 20px solid;
 }
-border: rgba(212, 0, 67, 0.69) 3px solid;
 
 /* 
 .card-back {
@@ -102,7 +110,7 @@ border: rgba(212, 0, 67, 0.69) 3px solid;
     /* width: 210px;
     height: 280px;
     padding: 15px;
-} */ */
+} */ 
 
 /* .card-front { */
     /* height: 280px;

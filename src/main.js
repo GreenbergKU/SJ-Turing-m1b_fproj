@@ -9,7 +9,6 @@ var game;
 document.onload = setUpGame();
 
 //************ EVENT LISTENERS ********************* */
-//document.addEventListener("keydown", delegateSlapDown);
 document.addEventListener("keydown", delegateDealvsSlap);
 
 //*************** EVENT HANDLERS ****************** */
@@ -49,12 +48,11 @@ function delegateDealvsSlap(event) {
         //player = game.playerB
         if (game.timeToSlap) {
             game.updateSlap(playerB);
-            game.updateSlap(playerB)
-            //slapDelegation(player);
+            game.slapDelegation(playerB);
         };
         
         console.log("'j'event.key", event.key);
-        console.log("B-handler: Post-UpdSlap", player)
+        console.log("B-handler: Post-UpdSlap")
     };
 };
 
@@ -69,6 +67,7 @@ function setUpGame() {       console.log('startGame');
     game.dealCards(game.deckCards.card)
     game.shuffle(game.playerA.hand);
     game.shuffle(game.playerB.hand)
+    toggleTurnBorder();
 
     //might be done in listener
 };
@@ -87,21 +86,11 @@ function setUpGame() {       console.log('startGame');
 //     };
 // };
 
-function slapDelegation(player) {          console.log('slapDelegation')
-    player = game.playerA.slapped ? game.playerA : game.playerB;
-    otherPlayer = game.playerA.slapped ? game.playerB : game.playerA
-    // should be taken care of by event listener
-    timeToSlap ? goodSlapAction(player) : 
-    player.push(otherPlayer.hand.shift());
-updateSlap();
-  //WORD THIS BETTER!!!!!!!!!
-};
-
 function displayCard() {
-var imgAllTags = document.getElementsByTagName("img");
-var card = game.playersTurn.hand.slice(0,1);
-imgAllTags[1].src = `${card[0].filepath}.png`;
-
+    var imgAllTags = document.getElementsByTagName("img");
+    var card = game.playersTurn.hand.slice(0,1);
+    imgAllTags[1].src = `${card[0].filepath}.png`;
+//addChangeBorder
 
 console.log(card, card[0].filepath);
 // border = image border, cardimg = img 
@@ -116,8 +105,25 @@ console.log(card, card[0].filepath);
 // function twoSlapDecider() {             
 //     console.log('twoSlapDecider')
 // };
+function toggleTurnBorder() {
+    document.getElementById('playerA').style.backgroundColor = "transparent";
+    document.getElementById('playerB').style.backgroundColor = "transparent";
+    document.getElementById(`${game.playersTurn.id}`).style.backgroundColor="gold";
+};
+// NOT READY YET
+// function displayMessage() {
+//     var messageList = []
+//         var gameStart = "Cards have been delt, Player 1 it's your turn!";
+//         var slapJack = "";
+//         var doubles = "";
+//         var sandwich = '';
+//         var badSlap = '';
+    
+// };
 
-      
+
+
+// PROJECT NOTES/OLD CODE
 
 // function filterDownDealvsSlap(event) {
 //     console.log("Handle: filterDownDealvsSlap");

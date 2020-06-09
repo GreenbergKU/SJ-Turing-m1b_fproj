@@ -62,9 +62,6 @@ class Game {
   }; 
 
   takeTurn() {              console.log('taketurn')
-   
-    //this.checkGameStatus();  Added to eventHandlers
-   
     displayCard()
     this.playersTurn.playCard();
     this.toggleTurn(); 
@@ -144,7 +141,8 @@ class Game {
         /// currently on both main.js and game.js
   };
    
-  goodSlapAction(player) {                  console.log('goodSlapAction')
+  goodSlapAction(player) { 
+    var player = `this.${player}`;                 console.log('goodSlapAction')
     player.push(this.shuffle(this.centerPile));
   };
     

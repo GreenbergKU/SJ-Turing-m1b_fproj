@@ -5,7 +5,7 @@
 
 //************* GLOBAL VARIABLES ******************** */
 var game;
-var player = new Player;
+// var player = new Player;
 document.onload = setUpGame();
 
 //************ EVENT LISTENERS ********************* */
@@ -23,21 +23,22 @@ function delegateDealvsSlap(event) {
     // }
 
     if (event.key === "q") {
-        game.takeTurn()
-        player = game.playerA
+        if (game.playersTurn === game.playerA) {
+            game.takeTurn()
+        };
         console.log("'q'event.key:", event.key)
     }
     if (event.key === "p") {
-        player = game.playerB;
-        game.takeTurn();
-        
+        if (game.playersTurn === game.playerB) {
+            game.takeTurn()
+        };
         console.log("'p'event.key:", event.key)
     };
     if (event.key === "f") {       
-        player = game.playerA;
+        //player = game.playerA;
         if (game.timeToSlap) {
-            game.updateSlap(player);
-            //slapDelegation(player);
+            game.updateSlap(playerA);
+            game.slapDelegation(playerA);
         };
 
         console.log("'f'event.key:", event.key);
@@ -45,9 +46,10 @@ function delegateDealvsSlap(event) {
     }
 
     if (event.key === "j") {       
-        player = game.playerB
+        //player = game.playerB
         if (game.timeToSlap) {
-            game.updateSlap(player);
+            game.updateSlap(playerB);
+            game.updateSlap(playerB)
             //slapDelegation(player);
         };
         
@@ -57,12 +59,17 @@ function delegateDealvsSlap(event) {
 };
 
 
-function setUpGame() {          console.log('startGame'); 
+function setUpGame() {       console.log('startGame');
     var playerA = new Player("playerA");
     var playerB = new Player("playerB");
-    game = new Game(playerA, playerB); 
+    game = new Game(playerA, playerB);
+    
+    // could move these to Game.js
     game.createDeck();
     game.dealCards(game.deckCards.card)
+    game.shuffle(game.playerA.hand);
+    game.shuffle(game.playerB.hand)
+
     //might be done in listener
 };
 
@@ -91,11 +98,16 @@ updateSlap();
 };
 
 function displayCard() {
+var imgAllTags = document.getElementsByTagName("img");
+var card = game.playersTurn.hand.slice(0,1);
+imgAllTags[1].src = `${card[0].filepath}.png`;
 
-    
-    var card = game.playersTurn.hand.slice(0,1);
-    var filepath = card[0].filepath
-    console.log(card, card[0].filepath);
+
+console.log(card, card[0].filepath);
+// border = image border, cardimg = img 
+// var centerPileImg = imgAllTags[1].src  
+// var interPath = `${filepath}.png`
+//var filepath = card[0].filepath
 }
 
 

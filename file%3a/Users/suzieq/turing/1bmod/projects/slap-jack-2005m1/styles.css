@@ -31,26 +31,24 @@ h3 {
     box-sizing: border-box;
     position: relative;
     display: flex;
-    width: 30%;
+    width: 88px;
     margin: 4%;
     padding: 1%;
-
+    background-color: rgba(212, 0, 67, 0.3);
+    border: rgba(212, 0, 67, 0.69) 3px solid;
 
 }
 
 .h3-A { 
     justify-content: center;
-    justify-self: flex-start;
-    background-color: rgba(212, 0, 67, 0.3);
-    border: rgba(212, 0, 67, 0.69) 3px solid;
+    margin-right: 21%;
+    /* justify-self: flex-start; */
 }
 
 .h3-B {
     justify-content: center;
-    justify-self: flex-end;
-    background-color: rgba(212, 0, 67, 0.3);
-    border: rgba(212, 0, 67, 0.69) 3px solid;
-    
+    margin-left: 21%;
+    /* justify-self: flex-end; */
 }
   
 section {
@@ -69,6 +67,18 @@ section {
     height: 290px;
     justify-content: center;
     color: black;
+    /* border: transparent 20px solid; */
+    border: purple 25px solid;
+    /* border-left-width: 35px; */
+    /* padding: 11px; */
+    /* margin-left: 5px; */
+}
+#deck-card-pA {
+    border-right-width: 35px;
+}
+
+#deck-card-pB {
+
 }
   
 img {
@@ -91,9 +101,13 @@ img {
 }
 
 .playerB {
-    border: rgba(212, 0, 67, 0.729) 20px solid;
+    border: rgba(212, 0, 67, 0.700) 20px solid;
 }
-border: rgba(212, 0, 67, 0.69) 3px solid;
+
+.playerTurn {
+    border: rgba(212, 0, 67, 0.729) 20px solid;
+ 
+}
 
 /* 
 .card-back {

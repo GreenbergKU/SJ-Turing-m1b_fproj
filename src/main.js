@@ -19,16 +19,14 @@ function delegateDealvsSlap(event) {
         userSlapCard(game.playerB);    
     };
 };
-//function reinstantiatePlayer(savedPlayer) {
-
-    
+  
 function retrieveFromStorage() {
     var retrievedPlayer = localStorage.getItem("slap-jack:playerWins");
     var savedPlayer = JSON.parse(retrievedPlayer);
     setUpGame(savedPlayer)
 }
     // reinstantiatePlayer(savedPlayer)
-function setUpGame(savedPlayer, player) {       
+function setUpGame(savedPlayer) {       
     console.log('startGame');    
     savedPlayer = new Player(savedPlayer.id, savedPlayer.wins)
     var playerB = new Player("playerB")
@@ -96,15 +94,3 @@ function displayMessage(player) {
 };
 
 
-
-
-
-// function revive(array) {
-//     var savedActivity;
-//     pastActivities = [];
-//     array.forEach(function(activity) {
-//       savedActivity = new Activity(activity.category, activity.description, activity.minutes, activity.seconds, activity.id);
-//       pastActivities.push(savedActivity);
-//     });
-//     displayPastActivities();
-// };

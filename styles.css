@@ -6,6 +6,14 @@
   
 body {
     color: white;
+    max-width: 1200px;
+    min-width: 750px;
+}
+
+/* FIREFOX  */
+body {
+    height: 100vh;
+    max-height: 775px;
 }
 
 .background-img {
@@ -15,7 +23,7 @@ body {
 h1.ontop {
     position: relative;
     margin: 10px;
-    top: 2.4em;
+    top: 1.5em;
 }
 
 h1 {
@@ -31,18 +39,19 @@ h3 {
     box-sizing: border-box;
     position: relative;
     display: flex;
-    width: 30%;
+    width: auto;
     margin: 4%;
     padding: 1%;
-
-
 }
+
 
 .h3-A { 
     justify-content: center;
     justify-self: flex-start;
     background-color: rgba(212, 0, 67, 0.3);
     border: rgba(212, 0, 67, 0.69) 3px solid;
+    margin-right: 23%;
+    margin-left: 5%
 }
 
 .h3-B {
@@ -50,7 +59,8 @@ h3 {
     justify-self: flex-end;
     background-color: rgba(212, 0, 67, 0.3);
     border: rgba(212, 0, 67, 0.69) 3px solid;
-    
+    margin-right: 33px;
+    margin-left: 20%;
 }
   
 section {
@@ -79,18 +89,17 @@ img {
     margin: 0;
     padding: 11px;
 }
-
 img.playerTurnA {
     background-color: gold;
 }
 
-img.playerTurnB {
-    background-color: gold;
-}
 
+/* img.playerTurnB {
+    background-color: gold;
+} */
 
 .playerA {
-    border: rgba(212, 0, 67, 0.729) 20px solid;
+    border: rgba(176, 1, 56, 0.947) 20px solid;
 }
 
 .middle-pile {
@@ -99,22 +108,26 @@ img.playerTurnB {
 }
 
 .playerB {
-    border: rgba(212, 0, 67, 0.729) 20px solid;
+    border: rgb(176, 1, 56, 0.947) 20px solid;
 }
 
 .hidden {
     display: none;
 }
 
+
+
 .win-section {
     display: flex;
     justify-items: self-end;
     position: relative;
+    padding-left: 3px;
+    padding-right: 3px;
 }
 /* *SPACING- deckCards(top)* */
 
 
 #deck-cards {
-    margin-top: 15%;
+    margin-top: 8%;
 }
   

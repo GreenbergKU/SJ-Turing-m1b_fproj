@@ -1,5 +1,6 @@
 var game;
-document.onload = setUpGame();
+document.onload = retrieveFromStorage();
+//setUpGame();
 
 document.addEventListener("keydown", delegateDealvsSlap);
 
@@ -18,14 +19,30 @@ function delegateDealvsSlap(event) {
         userSlapCard(game.playerB);    
     };
 };
+//function reinstantiatePlayer(savedPlayer) {
 
-function setUpGame() {       
-    console.log('startGame');
-    var playerA = new Player("playerA");
-    var playerB = new Player("playerB");
-    game = new Game(playerA, playerB);
+    
+function retrieveFromStorage() {
+    var retrievedPlayer = localStorage.getItem("slap-jack:playerWins");
+    var savedPlayer = JSON.parse(retrievedPlayer);
+    setUpGame(savedPlayer)
+}
+    // reinstantiatePlayer(savedPlayer)
+function setUpGame(savedPlayer, player) {       
+    console.log('startGame');    
+    savedPlayer = new Player(savedPlayer.id, savedPlayer.wins)
+    var playerB = new Player("playerB")
+    game = new Game(savedPlayer, playerB)
+    displayWins();
     cardCreation();
-};
+};   
+    // //game = new Game(savedPlayer, player); 
+    // //displayWins(game.savedPlayer)    
+    // //}
+    // var playerA = new Player("playerA");
+    // var playerB = new Player("playerB");
+    // game = new Game(playerA, playerB);
+//};
 
 function cardCreation() {
     game.createDeck();
@@ -49,6 +66,10 @@ function userSlapCard(player) {
         displayCard();
     };
 };
+function displayWins() {
+    document.getElementById('winsA').innerText = `${game.playerA.wins} WINS`
+    document.getElementById('winsB').innerText = `${game.playerB.wins} WINS`
+}
 
 function displayCard() {
     var imgAllTags = document.getElementsByTagName("img");
@@ -73,3 +94,17 @@ function displayMessage(player) {
     headerMsg.innerText = game.winner !== "" ? winMsg :
     game.slapOpportunity === "BAD-SLAP" ? badSlapMsg : goodSlapMsg;
 };
+
+
+
+
+
+// function revive(array) {
+//     var savedActivity;
+//     pastActivities = [];
+//     array.forEach(function(activity) {
+//       savedActivity = new Activity(activity.category, activity.description, activity.minutes, activity.seconds, activity.id);
+//       pastActivities.push(savedActivity);
+//     });
+//     displayPastActivities();
+// };

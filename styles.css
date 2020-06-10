@@ -58,7 +58,6 @@ section {
     display: flex;
     width: 100%;
     justify-content: space-around;
-    border: black 1px dotted;
     padding: 5px;
     top: 6em;
 }
@@ -103,20 +102,9 @@ img.playerTurnB {
     border: rgba(212, 0, 67, 0.729) 20px solid;
 }
 
-/* 
-.card-back {
-    /* overflow-x: scroll; */
-    /* overflow: scroll; */
-    /* width: 210px;
-    height: 280px;
-    padding: 15px;
-} */ 
-
-/* .card-front { */
-    /* height: 280px;
-
-    width: 210px;
-} */
+.hidden {
+    display: none;
+}
 
 .win-section {
     display: flex;

@@ -7,27 +7,26 @@
         <title>SLAP-JACK: FINAL PROJECT mod1#2005</title>
     </head>
      <h1 class="ontop">CURRENT PLAY! Player # takes the pile!</h1>
-        
-     <body class="background-img" background="./assets/watercolor-background.png"></body>
-        
+     <body class="background-img" background="./assets/watercolor-background.png"></body>   
         <section id="deck-cards"> 
-          <div id="deck-card-pA" class="deck-cards player-hand" name="playerA" background-img="">              
-          <img class="card-back playerA" src="assets/deckCards/back.png" alt="backside image of playing card">
+          <div id="deck-card-pA" class="deck-cards player-hand playerTurn-A" name="playerA" background-img="">              
+          <img id="playerA"  class="card-back playerA playerTurnA.hidden" src="./assets/deckCard/back.png" alt="">
         </div>
           <div id="deck-card-C" class="deck-cards center-pile" name="middle" background-img="">
-            <img class="card-front middle-pile" src="assets/deckCards/11-4blue-jack.png" alt="backside image of playing card">
+            <img id="card-middle" class="card-front middle-pile" src="./assets/deckCard/11-4.png" alt="">
           </div>
-          <div id="deck-card-pB" class="deck-cards player-hand" name="playerB" background-img="">
-            <img class="card-back playerB" src="assets/deckCards/back.png" alt="backside image of playing card">
+          <div id="deck-card-pB" class="deck-cards player-hand playerTurn-B" name="playerB" background-img="">
+            <img id="playerB" class="card-back playerB playerTurnB" src="./assets/deckCard/back.png" alt="">
           </div>  
         </section>
         <section id="win-section">
-          <h3 class="h3-ontop h3-A"># Wins</h3>
-          <!-- <h3></h3> -->
-          <h3 class="h3-ontop h3-B"># Wins</h3>
+          <h3 class="h3-ontop h3-A win-sectionA"># Wins</h3>
+          <h3></h3>
+          <h3 class="h3-ontop h3-B win-sectionB"># Wins</h3>
         </secton>       
         <script src="./src/Player.js"></script>
         <script src="./src/Game.js"></script> 
         <script src="./src/main.js"></script>
-    </body>
+  </body>
+
 </html>

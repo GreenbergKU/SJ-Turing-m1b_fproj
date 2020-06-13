@@ -22,13 +22,21 @@ class Player {
     )  //after the function fires
   };
   
-  saveToStorage() {                              console.log("saveToStorage")
-    this.wins
-  };
-
   toggleSlap() {                                    console.log("toggleSlap")
     return this.slapped = !this.slapped; 
+  };
+  
+  updatePlayerWins() {      console.log("@ updPlayerWins")
+    this.wins++
   }
+
+  saveToStorage(player) {        console.log("saveToStorage")
+
+    var stringifiedSlapJack = JSON.stringify({"id": player.id, "wins": player.wins});
+    localStorage.setItem('slap-jack:playerWins', stringifiedSlapJack);
+  };
+  
+  
   
 };
    // if (this.hand.length > 0) { 

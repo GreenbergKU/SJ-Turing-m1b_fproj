@@ -26,17 +26,30 @@ class Player {
     return this.slapped = !this.slapped; 
   };
   
-  updatePlayerWins() {      console.log("@ updPlayerWins")
-    this.wins++
+  updatePlayerWins(player, game) {      console.log("@ updPlayerWins")
+    this.wins++;
+    console.log("updWins: player=", player, "this.wins=", this.wins, "game=", game)
+    var savedSlapJackPlayers = [];
+    this.saveToStorage(game, savedSlapJackPlayers);
   }
 
-  saveToStorage(player) {        console.log("saveToStorage")
+  // saveToStorage(player, savedPlayers) {        console.log("saveToStorage")
 
-    var stringifiedSlapJack = JSON.stringify({"id": player.id, "wins": player.wins});
-    localStorage.setItem('slap-jack:playerWins', stringifiedSlapJack);
+  //   var stringifiedSlapJack = JSON.stringify({"id": player.id, "wins": player.wins});
+  //   localStorage.setItem('slap-jack: playerWins', stringifiedSlapJack);
+  // };
+  
+  saveToStorage(game, savedPlayers) {        
+    console.log("saveToStorage");
+    var savedPlayers = [];
+    var playerA = {"id" : game.playerA.id, "wins": game.playerA.wins}; 
+    var playerB = {"id" : game.playerB.id, "wins": game.playerB.wins};  
+ // var stringifiedSlapJackSinglePlayer = JSON.stringify(player);
+ // localStorage.setItem('slap-jack: playerWins', stringifiedSlapJackSinglePlayer)  
+    savedPlayers.push(playerA, playerB); 
+    var stringifiedSlapJackPlayers = JSON.stringify(savedPlayers);   
+    localStorage.setItem('slap-jack:playerWins', stringifiedSlapJackPlayers)
   };
-  
-  
   
 };
    // if (this.hand.length > 0) { 

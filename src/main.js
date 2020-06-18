@@ -4,7 +4,9 @@ document.onload = retrieveFromStorage();
 document.addEventListener("keydown", delegateDealvsSlap);
 
 function delegateDealvsSlap(event) {
-    console.log("@Handle: delegateDvsS")
+    console.log("@Handle: delegateDvsS", event)
+    // @handle => takeTurn, (Fully dependant on playerTurn!!)
+
     if (event.key === "q") {
         userDealCard(game.playerA);   
     };
@@ -17,6 +19,10 @@ function delegateDealvsSlap(event) {
     if (event.key === "j") {
         userSlapCard(game.playerB);    
     };
+    if (game.gameOver && event.code === "Space") {
+        //document.querySelector('h1').classList.toggle("hidden"); 
+        retrieveFromStorage();
+    }
 };
   
 function retrieveFromStorage() {
@@ -25,6 +31,7 @@ function retrieveFromStorage() {
     if (localStorage.getItem("slap-jack:playerWins") !== null  ) {
         // (player1 = "playerA", 
         // player1 = "playerB" ) :
+        document.querySelector('h1').innerText = "2 PLAYER SLAP-JACK!"
         var player1 = JSON.parse(localStorage.getItem("slap-jack:playerWins"))[0].wins;
         var player2 = JSON.parse(localStorage.getItem("slap-jack:playerWins"))[1].wins;  
         console.log(player1)
@@ -54,13 +61,13 @@ function cardCreation() {
 function displayWins() {
     console.log("@displayWins")
     document.getElementById('winsA').innerText = `${game.playerA.wins} WINS`;
-    document.getElementById('winsB').innerText = `${game.playerB.wins} WINS`;
-    
+    document.getElementById('winsB').innerText = `${game.playerB.wins} WINS`;    
     clearMessage(4000);
     displayGame();
 };
 
 function displayGame(player) {
+    console.log("@displayGame")    
     displayCard();
     toggleTurnBorder();
     displayMessage(player);    
@@ -69,26 +76,44 @@ function displayGame(player) {
 function userDealCard(player) {
     console.log("@userDealCard", player)   
     if (game.playersTurn === player) {
-        // game.endGameCondition ? game.endGameCheck(player) : 
+        if (game.lastChance) {
+            game.checkForNoSlap();
+        };
+        if (game.endGameCondition && !game.gameOver) {
+            game.endGameCheck()
+        };
         game.takeTurn();
         displayGame(player);
+        // if (game.endGameCondition) {
+        //     game.lastChance ? game.checkLastChance() : game.endGameCheck();
+        // };
+        // game.takeTurn();
+        // displayGame(player);       
     };
 };
-
+// if (game.endGameCondition) {
+        //     game.ForWinnercheck()
+        // };       
 function userSlapCard(player) {
     console.log("@userSlapCard", player)
     if (!game.slapOccured) {
         game.updateSlap(player);
     };
-    !game.endGameCondition ? game.checkWinConditions(player) : 
-    game.checkForWinner(player)
-    console.log("@userSlap: !game.endGame = ", !game.endGameCondition)
+    if (!game.gameOver) {
+        game.endGameCondition ? game.endGameCheck(player) : game.checkWinConditions(player);
+        // game.endGameCondition ? game.checkLastChance(player) : game.checkWinConditions(player)
+        console.log("@userSlap: lastChance= ", game.lastChance,
+        "@userslap: game.endGameCond=", game.endGameCondition);
+    };
     // game.endGameCondition ? game.checkForLastChance() :
     // !game.lastChance ? game.checkWinConditions(player) : game.checkForWinner(player);   
 };
 
 function displayCard() {
     console.log("@displayCard()")
+    document.getElementById(`${game.playerA.id}`).src="./assets/deckCard/back.png";
+    document.getElementById(`${game.playerB.id}`).src="./assets/deckCard/back.png";
+    
     if (game.centerPile.length > 0) {
         var middlePile = document.getElementById("center-pile");
         var playerCard = game.centerPile.slice(-1);
@@ -97,7 +122,10 @@ function displayCard() {
     if (game.endGameCondition) {
         document.getElementById(`${game.playersTurn.id}`).src="./assets/deckCard/back.png";
         document.getElementById(`${game.underDog.id}`).src="";  
-    };     
+    }; //else {
+    //     document.getElementById(`${game.playerA.id}`).src="./assets/deckCard/back.png";
+    //     document.getElementById(`${game.playerB.id}`).src="./assets/deckCard/back.png";
+    // }    
 };
 
 function toggleTurnBorder() {
@@ -110,26 +138,66 @@ function toggleTurnBorder() {
 function displayMessage(player) {
     console.log("@displayMessage", game.slap)
     if (game.slapOccured) {
+        var header = document.querySelector('h1');
         var other = player === game.playerA ? game.playerB : game.playerA;
         var goodSlapMsg = `${game.slap} ${player.id} takes the pile!`;
-        var badSlapMsg = `${game.slap} ${player.id} forfeits a card to ${other.id}!`;
-        var winMsg = `WIN! CONGRATULATIONS ${player.id}! YOU'RE THE WINNER!`;      
-        document.querySelector('h1').classList.toggle('hidden');
-        document.querySelector('h1').innerText = game.goodSlap ? goodSlapMsg : badSlapMsg;
-        clearMessage(5000);   
-    };  
-};    
+        var badSlapMsg = `${game.slap} ${player.id} forfeits a card to ${other.id}!`; 
+        // var winMsg =`${game.slap} ${player.id} YOU WIN!`; 
+        // var drawMsg = `It's a ${game.slap}, ${player.id}`; 
+        header.classList.toggle('hidden');
+        game.gameOver ? displayGameOverMsg(player)
+            : header.innerText = game.goodSlap ? goodSlapMsg : badSlapMsg;
+        clearMessage(3000);   
+    };
+};
+
+function displayGameOverMsg(player) {
+    var header = document.querySelector('h1');
+    var winMsg =`${game.slap} ${player.id} YOU WIN!`; 
+    var drawMsg = `It's a ${game.slap}, ${player.id}`; 
+    //header.classList.toggle('hidden');
+    header.innerText = game.slap === "WINNER!" ? winMsg : drawMsg;
+};
+    
+    // 
+    //     document.querySelector('h1').classList.toggle('hidden');
+    //     document.querySelector('h1').innerText =
+             
+    
+   
 
 function clearMessage(milliseconds) {
     console.log("@clearMessage")    
     var centerImg = document.getElementById('center-pile'); 
-    setTimeout(function clearDelay() {
-       document.querySelector('h1').classList.toggle("hidden"); 
-        if (centerImg.src.includes("11-4")) {
-            centerImg.src=""; 
-        };   
-    }, milliseconds);
+    if (!game.gameOver) {
+        setTimeout(function clearDelay() {
+        document.querySelector('h1').classList.toggle("hidden"); 
+            if (centerImg.src.includes("again")) {
+                centerImg.src=""; 
+            };  
+         
+        }, milliseconds);
+    };
 };
+
+function askPlayAgain() { 
+    document.getElementById("center-pile").src = "./assets/deckCard/slap-jack-again.png";
+};
+
+function shortcut() {
+    for (var i = 0; i < game.playerB.hand.length; i++) {
+        game.playerA.hand.push(game.playerB.hand[i]);
+    };
+    game.playerB.hand = [];
+    game.shuffle(game.playerA.hand);
+    game.checkGameStatus();
+    displayGame(game.playersTurn);
+    // game.slap = undefined;
+    // game.lastChance = undefined;
+    // game.slapOccured = false;
+    // game.gameOver = undefined;
+};
+
 
 
 //********* RETRIEVE FROM STORAGE() notes *************** 

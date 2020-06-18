@@ -4,7 +4,6 @@ document.onload = retrieveFromStorage();
 document.addEventListener("keydown", delegateDealvsSlap);
 
 function delegateDealvsSlap(event) {
-    console.log("@Handle: delegateDvsS", event)
     if (event.key === "q") {
         userDealCard(game.playerA);   
     };
@@ -23,19 +22,16 @@ function delegateDealvsSlap(event) {
 };
   
 function retrieveFromStorage() {
-    console.log("@retrieveFromStorage")
     var player1, player2;
     if (localStorage.getItem("slap-jack:playerWins") !== null) {
         document.querySelector('h1').innerText = "2 PLAYER SLAP-JACK!"
         var player1 = JSON.parse(localStorage.getItem("slap-jack:playerWins"))[0].wins;
         var player2 = JSON.parse(localStorage.getItem("slap-jack:playerWins"))[1].wins;  
-        console.log(player1)
     };
     setUpGame(player1, player2);
 };
 
 function setUpGame(player1, player2) {  
-    console.log('@setUpGame');    
      var playerA = new Player("playerA", player1);
      var playerB = new Player("playerB", player2);   
     game = new Game(playerA, playerB);
@@ -44,7 +40,6 @@ function setUpGame(player1, player2) {
 };   
 
 function cardCreation() {
-    console.log("@cardCreation")
     game.createDeck();
     game.dealCards(game.deckCards.card);
     game.shuffle(game.playerA.hand);
@@ -52,7 +47,6 @@ function cardCreation() {
 };
 
 function displayWins() {
-    console.log("@displayWins")
     document.getElementById('winsA').innerText = `${game.playerA.wins} WINS`;
     document.getElementById('winsB').innerText = `${game.playerB.wins} WINS`;    
     clearMessage(4000);
@@ -60,39 +54,35 @@ function displayWins() {
 };
 
 function displayGame(player) {
-    console.log("@displayGame")    
     displayCard();
     toggleTurnBorder();
     displayMessage(player);    
 };
 
 function userDealCard(player) {
-    console.log("@userDealCard", player)   
     if (game.playersTurn === player) {
         if (game.lastChance) {
             game.checkForNoSlap();
-        };
-        if (game.endGameCondition && !game.gameOver) {
+        } else if (game.endGameCondition && !game.gameOver) {
             game.endGameCheck();
         };
-        game.takeTurn();
-        displayGame(player);    
+        if (!game.gameOver) {
+            game.takeTurn();
+            displayGame(player);
+        };    
     };
 };
     
 function userSlapCard(player) {
-    console.log("@userSlapCard", player)
     if (!game.slapOccured) {
         game.updateSlap(player);
     };
     if (!game.gameOver) {
         game.endGameCondition ? game.endGameCheck(player) : game.checkWinConditions(player);
-        console.log("@userSlap: lastChance= ", game.lastChance);
     };
 };
 
 function displayCard() {
-    console.log("@displayCard()")
     document.getElementById(`${game.playerA.id}`).src="./assets/deckCard/back.png";
     document.getElementById(`${game.playerB.id}`).src="./assets/deckCard/back.png";
     if (game.centerPile.length > 0) {
@@ -107,14 +97,12 @@ function displayCard() {
 };
 
 function toggleTurnBorder() {
-    console.log("@toggleTurnBorder")
     document.getElementById('playerA').style.backgroundColor = "transparent";
     document.getElementById('playerB').style.backgroundColor = "transparent";    
     document.getElementById(`${game.playersTurn.id}`).style.backgroundColor="gold";
 };
 
 function displayMessage(player) {
-    console.log("@displayMessage", game.slap)
     if (game.slapOccured) {
         var header = document.querySelector('h1');
         var other = player === game.playerA ? game.playerB : game.playerA;
@@ -127,14 +115,12 @@ function displayMessage(player) {
 };
 
 function displayGameOverMsg(player) {
-    var header = document.querySelector('h1');
     var winMsg =`${game.slap} ${player.id} YOU WIN!`; 
     var drawMsg = `It's a ${game.slap}, ${player.id}`; 
-    header.innerText = game.slap === "WINNER!" ? winMsg : drawMsg;
+    document.querySelector('h1').innerText = game.slap === "WINNER!" ? winMsg : drawMsg;
 };
 
 function clearMessage(milliseconds) {
-    console.log("@clearMessage")    
     var centerImg = document.getElementById('center-pile'); 
     if (!game.gameOver) {
         setTimeout(function clearDelay() {

@@ -13,7 +13,6 @@ class Game {
   };
   
   createDeck() {          
-    console.log('createDeck');
     var card = {};
     this.deckCards.card = [];
     for (var number = 13; number > 0; number--) {
@@ -30,7 +29,6 @@ class Game {
   }; 
 
   shuffle(deck) {                              
-    console.log('shuffleDeck');          
     var randomIndex, randomCard;
     for (var i = deck.length; i > 0; i--) {
       randomIndex = Math.floor(Math.random() * deck.length);      
@@ -41,7 +39,6 @@ class Game {
   }; 
 
   dealCards(deck) {              
-    console.log('dealCards');  
     this.shuffle(deck);
     var i;
     while((i = deck.shift()) !== undefined) {
@@ -50,27 +47,22 @@ class Game {
   }; 
 
   takeTurn() {              
-    console.log('@taketurn')
     this.playersTurn.playCard();
     this.toggleTurn();   
     this.checkGameStatus();
   };
  
   toggleTurn() {         
-    console.log('function toggleTurn')  
     this.endGameCondition ? this.playersTurn :
     this.playersTurn = this.playersTurn === this.playerA ? this.playerB : this.playerA  
   };
 
   updateSlap(player) {           
-    console.log("updateSlap","B", this.slapOccured)
     this.slapOccured = !this.slapOccured;
     player.toggleSlap();
-    console.log("@update-A: sO, gS, LC",this.slapOccured, this.goodSlap, this.lastChance)
   };
 
   checkWinConditions(player) {
-    console.log("@checkWinConditions()")
     this.slap = "";
     if (this.centerPile.length > 0 || this.endGameCondition) {
       var card1 = this.centerPile[this.centerPile.length-1];    
@@ -94,7 +86,6 @@ class Game {
   };
 
   defineCurrentPlay(player) {
-    console.log("@defineCurrentPlay")
     if (this.slapOccured && this.slap === "") {
       this.slap = "BAD-SLAP!";
       this.goodSlap = false;
@@ -105,15 +96,12 @@ class Game {
   };
   
   slapDelegation(player) {                          
-    console.log('slapDelegation', "this", this.player, "other", player)
     this.player = player === game.playerA ? game.playerB : game.playerA;
-    console.log('slapDelegation', "this", this.player, "other", player)
     this.goodSlap ? this.goodSlapAction(player) : this.player.hand.push(player.hand.shift());
     this.resetSlap(player);
   };
    
   goodSlapAction(player) {          
-    console.log('goodSlapAction')               
     for (var i = 0; i < this.centerPile.length; i++) {
       player.hand.push(this.centerPile[i]);
     };
@@ -122,7 +110,6 @@ class Game {
   };
     
   resetSlap(player) {
-    console.log("@1resetSlap")
     if (this.endGameCondition) {
       this.checkGameStatus();
       displayCard(player);
@@ -135,7 +122,6 @@ class Game {
   };
 
   checkGameStatus() { 
-    console.log('checkGameStatus')
     this.endGameCondition = false;
     if (this.playerA.hand.length === 0 || this.playerB.hand.length === 0) {
       this.endGameCondition = true;
@@ -146,13 +132,11 @@ class Game {
   //********** END GAME SECTION ****************/
 
   activateEndGame() {
-    console.log("@activateEndGame")
     this.playersTurn = this.playerA.hand.length === 0 ? this.playerB : this.playerA;
     this.underDog = this.playerA.hand.length === 0 ? this.playerA : this.playerB; 
   };
     
   endGameCheck(player) {
-    console.log("@endGameCheck()")
     var hand = this.playersTurn.hand;
     this.playersTurn.hand[0].number === 11 ? this.triggerLastChance(player) 
       : hand.length === 1 ? this.goodSlapAction(this.playersTurn) : null;
@@ -167,26 +151,26 @@ class Game {
   };
 
   triggerLastChance() {
-    console.log("@triggerLastChance()")
     this.lastChance = true;
   };
 
   checkLastChance(player) { 
-    console.log("@checklastChance")
     if (this.underDog.slapped && this.goodSlap) {
       this.lastChance = false;
       this.checkWinConditions(player); 
-    }
-    else if (this.slapOccured) {
+    } else if (this.slapOccured) {
       this.checkForWinner(); 
     };
   };
 
   checkForWinner() {
-    console.log("@checkforWinner")
     this.winner = this.playersTurn.slapped && this.goodSlap ? this.playersTurn 
       : this.underDog.slapped && !this.goodSlap ? this.playersTurn 
       : this.playersTurn.slapped && !this.goodSlap;
+    this.displayWinner();
+  };
+
+  displayWinner() {
     if (this.winner === this.playersTurn) {
       this.slap = "WINNER!";
       this.gameOver = true;
@@ -210,7 +194,9 @@ class Game {
       this.slap = "DRAW!";
       this.playersTurn.id = "GAME OVER!";
       displayMessage(this.playersTurn);
+      askPlayAgain();
     };
   };
+
 };
 

@@ -6,11 +6,14 @@ class Player {
     this.slapped = false;
   };
 
-  playCard() {                              console.log("playCard")
+  playCard() {                              
+    console.log("playCard")
     console.log( 
       "B centerPile.length", game.centerPile.length, 
       "B this.hand", this.hand.length, 
-      "B game.playerA.hand", game.playerA.hand.length,
+      "B playerA hand", game.playerA.hand.length,
+      "B playerB hand", game.playerB.hand.length,
+
     ) //before the function
 
     game.centerPile.push(this.hand.shift());
@@ -18,15 +21,20 @@ class Player {
     console.log(    
       "A centerPile.length", game.centerPile.length, 
       "A this.hand", this.hand.length, 
-      "A game.playerA.hand", game.playerA.hand.length,
+      "A playerA hand", game.playerA.hand.length,
+      "A playerB hand", game.playerB.hand.length,
+      
     )  //after the function fires
   };
   
-  toggleSlap() {                                    console.log("toggleSlap")
-    return this.slapped = !this.slapped; 
+  toggleSlap() {                                    
+    console.log("toggleSlap")
+    //return
+    this.slapped = !this.slapped; 
   };
   
-  updatePlayerWins(player, game) {      console.log("@ updPlayerWins")
+  updatePlayerWins(player, game) {      
+    console.log("@ updPlayerWins")
     this.wins++;
     console.log("updWins: player=", player, "this.wins=", this.wins, "game=", game)
     var savedSlapJackPlayers = [];

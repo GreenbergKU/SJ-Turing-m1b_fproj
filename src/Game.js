@@ -7,7 +7,7 @@ class Game {
     this.playersTurn = this.playerA;
     this.underDog; 
     this.slap; 
-    this.goodSlap;
+    this.goodSlap = null;
     this.slapOccured = false;
     this.endGameCondition = false;
   };
@@ -29,7 +29,8 @@ class Game {
     };  
   }; 
 
-  shuffle(deck) {                              console.log('shuffleDeck');          
+  shuffle(deck) {                              
+    console.log('shuffleDeck');          
     var randomIndex, randomCard;
     for (var i = deck.length; i > 0; i--) {
       randomIndex = Math.floor(Math.random() * deck.length);      
@@ -39,7 +40,8 @@ class Game {
     return deck;
   }; 
 
-  dealCards(deck) {              console.log('dealCards');  
+  dealCards(deck) {              
+    console.log('dealCards');  
     this.shuffle(deck);
     var i;
     while((i = deck.shift()) !== undefined) {
@@ -49,7 +51,8 @@ class Game {
     };
   }; 
 
-  takeTurn() {              console.log('@taketurn')
+  takeTurn() {              
+    console.log('@taketurn')
     this.playersTurn.playCard();
     this.toggleTurn();   
     //this.endGameCondition ? this.checkForLastChance() : this.toggleTurn();    
@@ -57,7 +60,8 @@ class Game {
 
   };
  
-  toggleTurn() {         console.log('function toggleTurn')  
+  toggleTurn() {         
+    console.log('function toggleTurn')  
     this.endGameCondition ? this.playersTurn :
     this.playersTurn = this.playersTurn === this.playerA ? this.playerB : this.playerA  
   };
@@ -66,7 +70,7 @@ class Game {
     console.log("updateSlap","B", this.slapOccured)
     this.slapOccured = !this.slapOccured;
     //this.goodSlap = this.lastChance ? true : false;
-    player.toggleSlap(); 
+    player.toggleSlap();
     console.log("@update-A: sO, gS, LC",this.slapOccured, this.goodSlap, this.lastChance)
   };
 
@@ -106,14 +110,16 @@ class Game {
     this.slapDelegation(player);
   };
   
-  slapDelegation(player) {                          console.log('slapDelegation', "this", this.player, "other", player)
+  slapDelegation(player) {                          
+    console.log('slapDelegation', "this", this.player, "other", player)
     this.player = player === game.playerA ? game.playerB : game.playerA;
     console.log('slapDelegation', "this", this.player, "other", player)
     this.goodSlap ? this.goodSlapAction(player) : this.player.hand.push(player.hand.shift());
     this.resetSlap(player);
   };
    
-  goodSlapAction(player) {          console.log('goodSlapAction')               
+  goodSlapAction(player) {          
+    console.log('goodSlapAction')               
     for (var i = 0; i < this.centerPile.length; i++) {
       player.hand.push(this.centerPile[i]);
     };
@@ -126,10 +132,11 @@ class Game {
     console.log("@1resetSlap")
     if (this.endGameCondition) {
       this.checkGameStatus();
-      this.toggleTurn();
       displayCard(player)
+      this.toggleTurn();      
     }; 
     this.slap = "";
+    this.goodSlap = null;
     console.log("@2resetSlap")
     this.updateSlap(player);
     toggleTurnBorder();
@@ -137,11 +144,15 @@ class Game {
 
   checkGameStatus() { 
     console.log('checkGameStatus')
-    // this.endGameCondition = false;  
-    if (this.slapOccured && this.playerA.hand.length === 0 || this.playerB.hand.length === 0) {
+    this.endGameCondition = false;
+    //this.lastChance = false;  
+    if (this.playerA.hand.length === 0 || this.playerB.hand.length === 0) {
       this.endGameCondition = true;
-      this.activiateEndGame();
-      };
+      this.activateEndGame();
+      // if (this.lastChance) {
+      //   this.checklastChance();
+      //};
+    };
   };  
   /***********KEEP************* */    
       //this.triggerEndGameChanges();
@@ -162,30 +173,13 @@ class Game {
     // return this.underDog, this.playersTurn   
     // (could be conditional of toggle turn) // <- tried that but messes up reg cycle
     
-  checkForLastChance() {
-    this.centerPile.length > 0 ? 
-    (this.lastChance = this.centerPile[this.centerPile.length-1].number === 11 ? 
-      true : false) : null;   
-  };
+  // checkForLastChance() {
+  //   this.centerPile.length > 0 ? 
+  //   (this.lastChance = this.centerPile[this.centerPile.length-1].number === 11 ? 
+  //     true : false) : null;   
+  // };
 
-  checkForWinner(player) {
-
-    console.log("@checkForWinner")
-    if (this.lastChance && this.slapOccured) { //? // this.slapOccured && //LC && Occured/good 
-        // LC = true        // sO = true
-        player.hand.length === 0 ? this.checkWinConditions(player) : this.winner = player 
-    }   //if (playerSlap = underDog)  // game = regular rules  ELSE  // playersTurn = WINNER
-    else if (this.lastChance && !this.slapOccured) {
-              //LC = true    &&    //sO !== true      
-      player === this.underDog ? this.winner = player : this.winner = null;
-    } // if(playerSlap = underDog) //player = WINNER! ELSE // NO WINNER(draw!)
-    if (this.winner != undefined) {
-      alert("GAME OVER!"); //displayMessage win 
-      console.log("this: ", this)
-      player.updatePlayerWins(player, this);         
-    } 
-    else this.checkWinConditions(player)    
-  }; 
+  
   
   //******************************************* */
   //********** END GAME SECTION ****************/
@@ -193,22 +187,23 @@ class Game {
 
   //checkGameStatus() fires activateEndGame()
   activateEndGame() {
-    this.endGameCondition = true;    
+    console.log("@activateEndGame")
+    // this.endGameCondition = true;   
     //triggerPlayerTurn
     this.playersTurn = this.playerA.hand.length === 0 ? this.playerB : this.playerA;
     this.underDog = this.playerA.hand.length === 0 ? this.playerA : this.playerB; 
-    this.winner = this.underDog.slapped && !this.goodSlap ? this.playersTurn:undefined;
-    this.endGameCondition = this.underDog.slapped && this.goodSlap ? false:true;
   };
+    //should include this.winner = null
+    
+    //this.underDog.slapped && !this.goodSlap ? this.winner = this.playersTurn:undefined;
+    //this.endgameCondition = this.underDog.slapped && this.goodSlap ? false:true;
+  
   //   this.checkGameStatus() ? 
   //  this.triggerEndGameTurn();
   //   //this.checkGameStatus();
+  // endGameController(player) 
+  //   console.log("space");
   
-
-
-  endGameController(player) {
-    console.log("space");
-  }
     // @trigger: playersTurn reassigned,
     // @listener (key === "player") => handle;
     // @handle: if (endGame = true) => endGameController(player),
@@ -237,44 +232,147 @@ class Game {
     
       //centerPile -BeforePlay
       //check playersTurn.hand is hand.length === 1
-   
-    endGameChecks() {
+    
+    endGameCheck(player) {
+      console.log("@endGameCheck()")
       var hand = this.playersTurn.hand;
-      if (hand.length > 0) {
-        hand.length > 1 && hand[0].number !== 11 ? this.takeTurn()// !(LCrd) && !(pickUP)
-          : hand[0].number === 11 ? this.beginLastRound()
-          : hand.length === 1 && hand[0].number !== 11 ? this.goodSlapAction(this.playersTurn).takeTurn()
-          : alert("oh no! BUGS!!!") 
-      }; 
-      this.checkForGameOver();
+      // if (this.playersTurn.hand[0].number === 11) {
+      //   console.log("1", this.playersTurn.hand[0].number)
+      //   this.triggerLastChance(player); 
+      // } else if (hand.length === 1) {
+      //   console.log("2", hand.length === 1)
+      //   this.goodSlapAction(this.playersTurn);
+      // };
+      this.playersTurn.hand[0].number === 11 ? this.triggerLastChance(player) 
+        //console.log("1", this.playersTurn.hand[0].number)        
+        : hand.length === 1 ? this.goodSlapAction(this.playersTurn) 
+          : null;
+        this.checkForSlap(player);
+        //console.log("2", hand.length === 1)
+      // if (nextcard != 11jack && hand.length === 1) {}
+    }; 
+
+    checkForSlap(player) {
+      // if (this.slapOccured && this.lastChance) {
+      //   this.goodSlap = true; 
+      // };
+      // if (this.slapOccured && !this.lastChance) {
+      //   this.goodSlap = false;
+      // };
+      if (this.slapOccured) {
+        this.goodSlap = this.lastChance ? true:false;
+      };
+      // if (this.slapOccured && !this.lastChance) {
+      //   this.goodSlap = false;
+      // };
+
+      // if (this.playersTurn.slapped && !this.lastChance) {
+
+      // } else if (this.underDog.slapped && !this.lastChance) {
+      //   this.goodSlap = false;
+      //};
+      
+      this.checkLastChance(player);
+    
     };
-     
-    beginLastRound() {
+  
+    //   if (hand.length === 1) {  
+    //     //hand.length > 1 && hand[0].number !== 11 ? this.takeTurn()// !(LCrd) && !(pickUP)
+    //       hand[0].number === 11 ? this.triggerLastChance() : this.goodSlapAction(this.playersTurn)
+    //   }; 
+    //    if (hand[0].number === 11) {
+    //     this.triggerLastChance();}
+    //    else 
+    //       if (this hand.lenth === 0) {
+    //   } else 
+    //   //this.checkForGameOver();
+    // };
+
+    triggerLastChance() {
+      console.log("@triggerLastChance()")
       this.lastChance = true;
-      this.slapOccured === this.goodSlap ? true : false;
-      this.playersTurn = this.playersTurn.slapped || !this.underDog.slapped
-      !this.underDog.slapped ? this.playersTurn = this.winner : this.endGameCondition = true;
+      //this.slapOccured === this.goodSlap ? true : false;
+      //this.playersTurn = this.playersTurn.slapped || !this.underDog.slapped
+      //!this.underDog.slapped ? this.playersTurn = this.winner : this.endGameCondition = true;
     };
 
-    checkForGameOver() {
-      this.gameOver = this.winner !== undefined ? true : false;
-      this.winner = this.playersTurn.slapped && !this.goodSlap ? null : undefined;
-      if (this.gameOver && this.winner === null) {
-        this.winner !== this.playerA || this.playerB;
-      } else if (this.winner === this.playerA || this.playerB) {
-        this.winner.updatePlayerWins(this.winner, this);
+
+
+    checkLastChance(player) { 
+      console.log("@checklastChance")
+      // this.goodSlap = this.slapOccured && this.lastChance ? true:false; 
+      if (this.underDog.slapped && this.goodSlap) {
+        this.lastChance = false;
+        this.checkWinConditions(player); 
+        //this.lastChance = false;
+      }
+      else if (this.slapOccured) {
+      this.checkForWinner() 
       };
     };
-    // pickUpCenterPile() {       
-    //   this.shuffle(this.centerPile);
-    //   this.centerPile.push(this.playersTurn.hand[0]);
-    //   this.playersTurn.hand = this.centerPile;
-    //   this.centerPile = [];
-    //   // or this.goodSlapAction(this.playerTurn)
-    // };
-  };
+
+    checkForWinner() {
+      console.log("@checkforWinner")
+      // this.winner = this.playersTurn.slapped && !this.goodSlap ? null : undefined;
+      // this.winner = this.underDog.slapped && !this.goodSlap ? this.playersTurn : undefined;
+      // this.gameOver = this.winner !== undefined ? true : false;
+
+      this.winner = this.playersTurn.slapped && this.goodSlap ? this.playersTurn 
+        : this.underDog.slapped && !this.goodSlap ? this.playersTurn 
+        : this.playersTurn.slapped && !this.goodSlap;
+       
+      //this.gameOver = this.winner === undefined ? false : true;
+      
+      if (this.winner === this.playersTurn) {
+        this.slap = "WINNER!"
+        this.gameOver = true;
+        displayMessage(this.playersTurn)
+        this.winner.updatePlayerWins(this.winner, this);
+        askPlayAgain();
+      };
+      
+      if (this.winner === null) {
+        //this.playersTurn.id = "GAME OVER!";
+        this.slap = "DRAW!";
+        this.gameOver = true;
+        displayMessage(this.playersTurn);
+        askPlayAgain();
+        //alert("GAME-OVER-NULL")
+      };
+    };
+
+    checkForNoSlap() {
+      if (!this.slapOccured) {
+        this.slapOccured = true;
+        this.gameOver = true;
+        this.winner = null;
+        //this.checkForWinner();
+        this.slap = "DRAW!";
+        this.playersTurn.id = "GAME OVER!";
+        displayMessage(this.playersTurn);
+
+      };
+    };
+};
     
-    
+  // checkForWinner(player) {
+
+  //   console.log("@checkForWinner")
+  //   if (this.lastChance && this.slapOccured) { //? // this.slapOccured && //LC && Occured/good 
+  //       // LC = true        // sO = true
+  //       player.hand.length === 0 ? this.checkWinConditions(player) : this.winner = player 
+  //   }   //if (playerSlap = underDog)  // game = regular rules  ELSE  // playersTurn = WINNER
+  //   else if (this.lastChance && !this.slapOccured) {
+  //             //LC = true    &&    //sO !== true      
+  //     player === this.underDog ? this.winner = player : this.winner = null;
+  //   } // if(playerSlap = underDog) //player = WINNER! ELSE // NO WINNER(draw!)
+  //   if (this.winner != undefined) {
+  //     alert("GAME OVER!"); //displayMessage win 
+  //     console.log("this: ", this)
+  //     player.updatePlayerWins(player, this);         
+  //   } 
+  //   else this.checkWinConditions(player)    
+  // }; 
   
       // if (hand.length > 1 && hand[0].number !== 11 ) { this.takeTurn()}
       

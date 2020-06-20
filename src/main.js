@@ -1,6 +1,9 @@
 var game;
 document.onload = retrieveFromStorage();
 
+//document.querySelector("button").addEventListener("click", displayRules);
+document.querySelector("button").addEventListener("click", toggleRules);
+
 document.addEventListener("keydown", delegateDealvsSlap);
 
 function delegateDealvsSlap(event) {
@@ -133,7 +136,7 @@ function clearMessage(milliseconds) {
 };
 
 function askPlayAgain() { 
-    document.getElementById("center-pile").src = "./assets/deckCard/slap-jack-again.png";
+    document.getElementById("center-pile").src = "./assets/deckCard/game-over.png";
 };
 
 function shortcut() {
@@ -144,4 +147,21 @@ function shortcut() {
     game.shuffle(game.playerA.hand);
     game.checkGameStatus();
     displayGame(game.playersTurn);
+};
+
+// function displayRules() {
+//     document.querySelector("main").classList.add("hidden");
+//     document.querySelector(".h1-wrapper").classList.add("hidden");
+//     document.querySelector(".rules").classList.remove("hidden");
+//     document.querySelector("#rules-txt").classList.add("hidden");
+//     document.querySelector("#done-txt").classList.remove("hidden");
+// };
+
+function toggleRules() {
+    document.querySelector("main").classList.toggle("hidden");
+    document.querySelector(".h1-wrapper").classList.toggle("hidden");
+    document.querySelector("h1").classList.toggle("hidden");
+    document.querySelector(".rules").classList.toggle("hidden");
+    document.querySelector("#rules-txt").classList.toggle("hidden");
+    document.querySelector("#done-txt").classList.toggle("hidden");
 };

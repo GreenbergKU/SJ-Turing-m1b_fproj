@@ -15,8 +15,8 @@
 </div> 
 
 ---
-<div style="text-align:center" >
-  <img src="./README/images/slap-jack-rules-README.PNG" width="800px" height="1100px" alt="slap-jack-play"/>
+<div style="text-align:center">
+  <img src="./README/images/slap-jack-rules-README.png" width="1000px" height="700px" alt="slap-jack-rules"/>
 </div>
 
 ---

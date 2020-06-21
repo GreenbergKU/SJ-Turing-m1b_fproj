@@ -1,22 +1,19 @@
 
 ---
-<div style="text-align:center">
-  <h2 style="font-weight:bold; font-size:70px">SLAP-JACK</h2>
-</div> 
+<h2 style="text-align:center; font-weight:800; font-size:70px">SLAP-JACK</h2>
 
----
 <div style="text-align:center">
-  <img src="./README/images/slap-jack-desktop-README-still.png" width="1200px" height="725" alt="slap-jack-fullscreen-game-start (5/3 2500x1500)"/>
+  <img src="./README/images/slap-jack-desktop-README-still.png" width="1200px" alignment="center" alt="slap-jack-fullscreen-game-start (5/3 2500x1500)"/>
 </div>
 
 ---
 <div style="text-align:center">
-  <h2 style="font-weight:bold">GAME INFORMATION: instructions/rules</h2>
+  <h3 style="font-weight:bold">GAME INFORMATION: instructions/rules</h3>
 </div> 
 
 ---
 <div style="text-align:center">
-  <img src="./README/images/slap-jack-rules-README.png" width="1000px" height="700px" alt="slap-jack-rules"/>
+  <img src="./README/images/slap-jack-rules-README.png" width="600px" alt="slap-jack-rules"/>
 </div>
 
 ---
